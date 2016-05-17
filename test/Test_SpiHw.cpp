@@ -28,13 +28,13 @@ TEST(WhenInitializingHardware, ItCanCompleteSlaveSetup)
           .withParameter("wireMode", USI_THREE_WIRE);
     mock().expectOneCall("ATtiny_SetClockSource")
           .withParameter("clockSource", USI_EXTERNAL_POSITIVE_EDGE_SOFTWARE_STROBE);
-    // mock().expectOneCall("SpiHw_ConfigureUsiPins")
-    //       .withParameter("masterOrSlave", SPI_SLAVE)
-    //       .withParameter("pinPosition", SPI_PORTA_PINS);
-    // mock().expectOneCall("SpiHw_SetCounterOverflowInterrupts")
-    //       .withParameter("enableInterrupts", TRUE);
-    // mock().expectOneCall("SpiHw_SetIsTransmittingFlag")
-    //       .withParameter("isTransmitting", FALSE);
+    mock().expectOneCall("ATtiny_ConfigureUsiPins")
+          .withParameter("masterOrSlave", SPI_SLAVE)
+          .withParameter("pinPosition", SPI_PORTA_PINS);
+    mock().expectOneCall("ATtiny_SetCounterOverflowInterrupts")
+          .withParameter("enableInterrupts", TRUE);
+    mock().expectOneCall("ATtiny_SetIsTransmittingFlag")
+          .withParameter("isTransmitting", FALSE);
 
     SpiHw_SetupAsSlave();
 }

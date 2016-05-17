@@ -1,6 +1,8 @@
 #ifndef __ATtiny_H
 #define __ATtiny_H
 
+#include "DataTypes.h"
+
 typedef enum
 {
     USI_PARTIAL_DISABLE = 0b00,
@@ -17,5 +19,27 @@ typedef enum
     USI_EXTERNAL_NEGATIVE_EDGE_SOFTWARE_STROBE = 0b111    //Spi mode 1
 } Usi_ClockSource;
 void ATtiny_SetClockSource(Usi_ClockSource clockSource);
+
+typedef enum
+{
+  SPI_PORTB_PINS = 0,
+  SPI_PORTA_PINS = 1
+} Spi_PinPosition;
+typedef enum
+{
+  SPI_MASTER = 0,
+  SPI_SLAVE  = 1
+} Spi_DeviceType;
+#define USI_MISO_BIT_A 0
+#define USI_MOSI_BIT_A 1
+#define USI_USCK_BIT_A 2
+#define USI_MISO_BIT_B 0
+#define USI_MOSI_BIT_B 1
+#define USI_USCK_BIT_B 2
+void ATtiny_ConfigureUsiPins(Spi_DeviceType masterOrSlave, Spi_PinPosition pinPosition);
+
+void ATtiny_SetCounterOverflowInterrupts(BOOL enableInterrupts);
+
+void ATtiny_SetIsTransmittingFlag(BOOL isTransmitting);
 
 #endif

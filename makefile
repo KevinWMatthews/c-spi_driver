@@ -2,7 +2,7 @@
 # Set SILENCE to @ to suppress compier output
 # For the most complete silence, pass the -s option
 QUIET = @
-SILENCE =
+SILENCE = @
 
 
 
