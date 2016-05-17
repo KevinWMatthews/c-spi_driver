@@ -1,0 +1,3 @@
+Should these tests directly reference the hardware? I think I'd rather have them use mocks, but perhaps this is an unnecessary abstraction layer.
+
+Add test include file to makefile, add src/inc directory structure to tests.
