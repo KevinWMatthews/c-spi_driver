@@ -22,7 +22,7 @@ TEST_GROUP(WhenInitializingHardware)
     }
 };
 
-TEST(WhenInitializingHardware, ItCanCompleteSlaveSetup)
+TEST(WhenInitializingHardware, ItCanCompleteSlaveSetupOnPortA)
 {
     mock().expectOneCall("ATtiny_SetWireMode")
           .withParameter("wireMode", USI_THREE_WIRE);
