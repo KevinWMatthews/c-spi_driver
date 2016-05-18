@@ -1,5 +1,5 @@
-#ifndef __ATtiny_H
-#define __ATtiny_H
+#ifndef __ATtinySpi_H
+#define __ATtinySpi_H
 
 #include "DataTypes.h"
 
@@ -10,7 +10,7 @@ typedef enum
     USI_TWO_WIRE_1      = 0b10,
     USI_TWO_WIRE_2      = 0b11    //Don't know the difference. Look it up.
 } Usi_WireMode;
-void ATtiny_SetWireMode(Usi_WireMode wireMode);
+void ATtinySpi_SetWireMode(Usi_WireMode wireMode);
 
 typedef enum
 {
@@ -18,7 +18,7 @@ typedef enum
     USI_EXTERNAL_POSITIVE_EDGE_SOFTWARE_STROBE = 0b101,   //Spi mode 0
     USI_EXTERNAL_NEGATIVE_EDGE_SOFTWARE_STROBE = 0b111    //Spi mode 1
 } Usi_ClockSource;
-void ATtiny_SetClockSource(Usi_ClockSource clockSource);
+void ATtinySpi_SetClockSource(Usi_ClockSource clockSource);
 
 typedef enum
 {
@@ -36,10 +36,10 @@ typedef enum
 #define USI_MISO_BIT_B 0
 #define USI_MOSI_BIT_B 1
 #define USI_USCK_BIT_B 2
-void ATtiny_ConfigureUsiPins(Spi_DeviceType masterOrSlave, Spi_PinPosition pinPosition);
+void ATtinySpi_ConfigureUsiPins(Spi_DeviceType masterOrSlave, Spi_PinPosition pinPosition);
 
-void ATtiny_SetCounterOverflowInterrupts(BOOL enableInterrupts);
+void ATtinySpi_SetCounterOverflowInterrupts(BOOL enableInterrupts);
 
-void ATtiny_SetIsTransmittingFlag(BOOL isTransmitting);
+void ATtinySpi_SetIsTransmittingFlag(BOOL isTransmitting);
 
 #endif

@@ -1,7 +1,7 @@
 extern "C"
 {
 #include "SpiHw.h"
-#include "ATtiny.h"
+#include "ATtinySpi.h"
 }
 
 #include "Test_SpiHw.h"
@@ -24,16 +24,16 @@ TEST_GROUP(WhenInitializingHardware)
 
 TEST(WhenInitializingHardware, ItCanCompleteSlaveSetupOnPortA)
 {
-    mock().expectOneCall("ATtiny_SetWireMode")
+    mock().expectOneCall("ATtinySpi_SetWireMode")
           .withParameter("wireMode", USI_THREE_WIRE);
-    mock().expectOneCall("ATtiny_SetClockSource")
+    mock().expectOneCall("ATtinySpi_SetClockSource")
           .withParameter("clockSource", USI_EXTERNAL_POSITIVE_EDGE_SOFTWARE_STROBE);
-    mock().expectOneCall("ATtiny_ConfigureUsiPins")
+    mock().expectOneCall("ATtinySpi_ConfigureUsiPins")
           .withParameter("masterOrSlave", SPI_SLAVE)
           .withParameter("pinPosition", SPI_PORTA_PINS);
-    mock().expectOneCall("ATtiny_SetCounterOverflowInterrupts")
+    mock().expectOneCall("ATtinySpi_SetCounterOverflowInterrupts")
           .withParameter("enableInterrupts", TRUE);
-    mock().expectOneCall("ATtiny_SetIsTransmittingFlag")
+    mock().expectOneCall("ATtinySpi_SetIsTransmittingFlag")
           .withParameter("isTransmitting", FALSE);
 
     SpiHw_SetupAsSlave();
@@ -42,16 +42,16 @@ TEST(WhenInitializingHardware, ItCanCompleteSlaveSetupOnPortA)
 TEST(WhenInitializingHardware, ItCanCompleteMasterSetupOnPortA)
 {
   //Set up SpiHw
-  mock().expectOneCall("ATtiny_SetWireMode")
+  mock().expectOneCall("ATtinySpi_SetWireMode")
         .withParameter("wireMode", USI_THREE_WIRE);
-  mock().expectOneCall("ATtiny_SetClockSource")
+  mock().expectOneCall("ATtinySpi_SetClockSource")
         .withParameter("clockSource", USI_EXTERNAL_POSITIVE_EDGE_SOFTWARE_STROBE);
-  mock().expectOneCall("ATtiny_ConfigureUsiPins")
+  mock().expectOneCall("ATtinySpi_ConfigureUsiPins")
         .withParameter("masterOrSlave", SPI_MASTER)
         .withParameter("pinPosition", SPI_PORTA_PINS);
-  mock().expectOneCall("ATtiny_SetCounterOverflowInterrupts")
+  mock().expectOneCall("ATtinySpi_SetCounterOverflowInterrupts")
         .withParameter("enableInterrupts", TRUE);
-  mock().expectOneCall("ATtiny_SetIsTransmittingFlag")
+  mock().expectOneCall("ATtinySpi_SetIsTransmittingFlag")
         .withParameter("isTransmitting", FALSE);
 
   //Set up Timer0
