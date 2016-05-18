@@ -2,6 +2,7 @@ extern "C"
 {
 #include "SpiHw.h"
 #include "ATtinySpi.h"
+#include "ATtinyTimer0.h"
 }
 
 #include "Test_SpiHw.h"
@@ -55,16 +56,16 @@ TEST(WhenInitializingHardware, ItCanCompleteMasterSetupOnPortA)
         .withParameter("isTransmitting", FALSE);
 
   //Set up Timer0
-  // mock().expectOneCall("ATtinyTimer0_SetTimerBitWidth")
-        // .withParameter("timerBitWidth", T0_EIGHT_BIT);
-  // mock().expectOneCall("Timer0_ClearTimerOnMatch")
-  //       .withParameter("clearOnMatchFlag", TRUE);
-  // mock().expectOneCall("Timer0_SetPrescaleFactor")
-  //       .withParameter("prescaleFactor", T0_PRESCALE_FACTOR_64);
-  // mock().expectOneCall("Timer0_SetTimerCompareValue0A")
-  //       .withParameter("timerCompareValue", 125);
-  // mock().expectOneCall("Timer0_SetTimerCompareInterrupt0A")
-  //       .withParameter("enableInterrupt", FALSE);
+  mock().expectOneCall("ATtinyTimer0_SetTimerBitWidth")
+        .withParameter("timerBitWidth", T0_EIGHT_BIT);
+  mock().expectOneCall("ATtinyTimer0_ClearTimerOnMatch")
+        .withParameter("clearOnMatchFlag", TRUE);
+  mock().expectOneCall("ATtinyTimer0_SetPrescaleFactor")
+        .withParameter("prescaleFactor", T0_PRESCALE_FACTOR_64);
+  mock().expectOneCall("ATtinyTimer0_SetTimerCompareValue0A")
+        .withParameter("timerCompareValue", 125);
+  mock().expectOneCall("ATtinyTimer0_SetTimerCompareInterrupt0A")
+        .withParameter("enableInterrupt", FALSE);
 
   SpiHw_SetupAsMaster();
 }
