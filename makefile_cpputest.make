@@ -11,8 +11,8 @@ SILENCE = @
 #############################
 TARGET_NAME = $(TEST_MODULE)
 
-SRC_DIRS = src
-INC_DIRS = inc
+SRC_DIRS = src mockHw/avr
+INC_DIRS = inc mockHw
 TEST_DIRS = test/$(TEST_MODULE)
 BUILD_DIR = build
 OBJECT_DIR = obj

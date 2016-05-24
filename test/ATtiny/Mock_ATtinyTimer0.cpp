@@ -5,12 +5,6 @@ extern "C"
 
 #include "CppUTestExt/MockSupport.h"
 
-void ATtinyTimer0_SetTimerBitWidth(Timer0BitWidth timerBitWidth)
-{
-    mock().actualCall("ATtinyTimer0_SetTimerBitWidth")
-          .withParameter("timerBitWidth", timerBitWidth);
-}
-
 void ATtinyTimer0_ClearTimerOnMatch(BOOL clearOnMatchFlag)
 {
     mock().actualCall("ATtinyTimer0_ClearTimerOnMatch")
