@@ -31,7 +31,7 @@ TEST(ATtinyTimer0, ItClearsMockRegistersAfterSetup)
 
 TEST(ATtinyTimer0, ItCanSetAlBitsInTimer0BitWidth)
 {
-    SET_BITMASK(expected, BITMASK_T0_TIMER_BIT_WIDTH);
+    SET_BITS(expected, BITMASK_T0_TIMER_BIT_WIDTH);
 
     ATtinyTimer0_SetTimerBitWidth(T0_SIXTEEN_BIT);
 

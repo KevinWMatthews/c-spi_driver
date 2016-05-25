@@ -12,7 +12,7 @@ SILENCE = @
 TARGET_NAME = $(TEST_MODULE)
 
 SRC_DIRS = src mockHw/avr
-INC_DIRS = inc mockHw
+INC_DIRS = inc mockHw ../bit_manip/inc
 TEST_DIRS = test/$(TEST_MODULE)
 BUILD_DIR = build
 OBJECT_DIR = obj
@@ -25,8 +25,16 @@ CXXFLAGS += -include $(CPPUTEST_HOME)/include/CppUTest/MemoryLeakDetectorNewMacr
 CFLAGS += -include $(CPPUTEST_HOME)/include/CppUTest/MemoryLeakDetectorMallocMacros.h
 LD_LIBRARIES = -L$(CPPUTEST_HOME)/lib -l CppUTest -lCppUTestExt
 
+#Flags for archive tool
+ifdef SILENCE
+	ARCHIVER_FLAGS=rcs
+else
+	ARCHIVER_FLAGS=rcvs
+endif
+
 C_COMPILER = gcc
 CPP_COMPILER = g++
+ARCHIVER = ar
 CFLAGS += -Wall
 DEP_FLAGS = -MMD -MP
 
@@ -54,6 +62,8 @@ TEST_DEP = $(addprefix $(OBJECT_DIR)/, $(test_dep))
 DEP_FILES = $(SRC_DEP) + $(TEST_DEP)
 
 TARGET = $(BUILD_DIR)/$(TARGET_NAME)
+# Production code is compiled into a library
+PRODUCTION_LIB = $(BUILD_DIR)/$(addsuffix .a,$(addprefix lib,$(TARGET_NAME)))
 
 
 
@@ -93,11 +103,14 @@ test: $(TARGET)
 	@echo Executing unit tests for: $(TARGET)
 	$(IGNORE_MAKEFILE_ERROR_ON_LINE) $(SILENCE)./$(TARGET) -c
 
-# Each product runs all product-specific tests as well as all general tests.
-# This may not be the best approach; it won't scale well.
-$(TARGET): $(SRC_OBJ) $(TEST_OBJ)
+# Be sure to link the test objects before the production library! This allows link-time substitution.
+$(TARGET): $(TEST_OBJ) $(PRODUCTION_LIB)
 	$(SILENCE)$(QUIET)mkdir -p $(dir $@)
-	$(SILENCE)$(CPP_COMPILER) -o $@ $(SRC_OBJ) $(TEST_OBJ) $(INCLUDE_FLAGS) $(CPPFLAGS) $(CXXFLAGS) $(LD_LIBRARIES)
+	$(SILENCE)$(CPP_COMPILER) -o $@ $^ $(INCLUDE_FLAGS) $(CPPFLAGS) $(CXXFLAGS) $(LD_LIBRARIES)
+
+$(PRODUCTION_LIB): $(SRC_OBJ)
+	$(SILENCE)$(QUIET)mkdir -p $(dir $@)
+	$(SILENCE)$(ARCHIVER) $(ARCHIVER_FLAGS) $@ $^
 
 # Compile test .cpp files
 $(OBJECT_DIR)/%.o: %.cpp
@@ -112,5 +125,9 @@ $(OBJECT_DIR)/%.o: %.c
 rebuild: clean test
 
 clean:
-	$(SILENCE)$(QUIET)rm -rf $(BUILD_DIR)
-	$(SILENCE)$(QUIET)rm -rf $(OBJECT_DIR)
+	$(SILENCE)$(QUIET)rm -rf $(TARGET)
+	$(SILENCE)$(QUIET)rm -rf $(PRODUCTION_LIB)
+	$(SILENCE)$(QUIET)rm -rf $(SRC_OBJ)
+	$(SILENCE)$(QUIET)rm -rf $(SRC_DEP)
+	$(SILENCE)$(QUIET)rm -rf $(TEST_OBJ)
+	$(SILENCE)$(QUIET)rm -rf $(TEST_DEP)

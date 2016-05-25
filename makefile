@@ -31,7 +31,12 @@ ifeq ($(strip $(TEST_MODULE)),)
 	TEST_MODULE = $(ALL_TEST_MODULES)
 endif
 
-
+ifeq ($(MAKECMDGOALS),test)
+	SUBMAKE_TARGET = test
+endif
+ifeq ($(MAKECMDGOALS),clean)
+	SUBMAKE_TARGET = clean
+endif
 
 ###############
 ### Targets ###
@@ -41,10 +46,9 @@ endif
 test: clear $(TEST_MODULE)
 
 $(TEST_MODULE):
-	$(SILENCE)$(MAKE) $(TEST_MAKEFILE) test TEST_MODULE=$@
+	$(SILENCE)$(MAKE) $(TEST_MAKEFILE) $(SUBMAKE_TARGET) TEST_MODULE=$@
 
-clean:
-	$(SILENCE)$(MAKE) $(TEST_MAKEFILE) clean
+clean: $(TEST_MODULE)
 
 # clear the terminal screen
 clear:
