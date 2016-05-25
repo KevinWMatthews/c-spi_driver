@@ -38,6 +38,18 @@ extern uint8_t TCCR0B;
 extern uint8_t OCR0A;
 // #define OCR0A   _SFR_IO8(0x13)
 
+// Timer/Counter0 Interrupt Mask Register
+extern uint8_t TIMSK;
+// #define TIMSK   _SFR_IO8(0x39)
+#define TICIE0  0
+#define TOIE0   1
+#define TOIE1   2
+#define OCIE0B  3
+#define OCIE0A  4
+#define OCIE1B  5
+#define OCIE1A  6
+#define OCIE1D  7
+
 
 
 #endif

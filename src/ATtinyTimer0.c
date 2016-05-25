@@ -21,3 +21,8 @@ void ATtinyTimer0_SetTimerCompareValue0A(u08 timerCompareValue)
 {
     OCR0A = timerCompareValue;
 }
+
+void ATtinyTimer0_SetTimerCompareInterrupt0A(BOOL enableInterrupt)
+{
+    SHIFT_AND_SET_BITMASK_TO(TIMSK, enableInterrupt, BITMASK_T0_COMPARE_INTERRUPT_0A);
+}

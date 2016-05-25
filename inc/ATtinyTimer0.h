@@ -26,6 +26,7 @@ typedef enum
 #define BITMASK_T0_PRESCALE_FACTOR ((1<<CS02) | (1<<CS01) | (1<<CS00))
 void ATtinyTimer0_SetPrescaleFactor(Timer0_PrescaleFactor prescaleFactor);
 
+#define BITMASK_T0_COMPARE_INTERRUPT_0A (1<<OCIE0A)
 void ATtinyTimer0_SetTimerCompareValue0A(u08 timerCompareValue);
 
 void ATtinyTimer0_SetTimerCompareInterrupt0A(BOOL enableInterrupt);
