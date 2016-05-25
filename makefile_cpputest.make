@@ -37,6 +37,8 @@ CPP_COMPILER = g++
 ARCHIVER = ar
 CFLAGS += -Wall
 DEP_FLAGS = -MMD -MP
+MAKE_DIR = mkdir -p
+REMOVE = rm -rf
 
 IGNORE_MAKEFILE_ERROR_ON_LINE = -
 
@@ -105,29 +107,29 @@ test: $(TARGET)
 
 # Be sure to link the test objects before the production library! This allows link-time substitution.
 $(TARGET): $(TEST_OBJ) $(PRODUCTION_LIB)
-	$(SILENCE)$(QUIET)mkdir -p $(dir $@)
+	$(SILENCE)$(QUIET)$(MAKE_DIR) $(dir $@)
 	$(SILENCE)$(CPP_COMPILER) -o $@ $^ $(INCLUDE_FLAGS) $(CPPFLAGS) $(CXXFLAGS) $(LD_LIBRARIES)
 
 $(PRODUCTION_LIB): $(SRC_OBJ)
-	$(SILENCE)$(QUIET)mkdir -p $(dir $@)
+	$(SILENCE)$(QUIET)$(MAKE_DIR) $(dir $@)
 	$(SILENCE)$(ARCHIVER) $(ARCHIVER_FLAGS) $@ $^
 
 # Compile test .cpp files
 $(OBJECT_DIR)/%.o: %.cpp
-	$(SILENCE)$(QUIET)mkdir -p $(dir $@)
+	$(SILENCE)$(QUIET)$(MAKE_DIR) $(dir $@)
 	$(SILENCE)$(CPP_COMPILER) $(DEP_FLAGS) -o $@ -c $< $(INCLUDE_FLAGS) $(TEST_INCLUDE_FLAGS)
 
 # Compile source .c files
 $(OBJECT_DIR)/%.o: %.c
-	$(SILENCE)$(QUIET)mkdir -p $(dir $@)
+	$(SILENCE)$(QUIET)$(MAKE_DIR) $(dir $@)
 	$(SILENCE)$(C_COMPILER) $(DEP_FLAGS) -o $@ -c $< $(CFLAGS) $(INCLUDE_FLAGS)
 
 rebuild: clean test
 
 clean:
-	$(SILENCE)$(QUIET)rm -rf $(TARGET)
-	$(SILENCE)$(QUIET)rm -rf $(PRODUCTION_LIB)
-	$(SILENCE)$(QUIET)rm -rf $(SRC_OBJ)
-	$(SILENCE)$(QUIET)rm -rf $(SRC_DEP)
-	$(SILENCE)$(QUIET)rm -rf $(TEST_OBJ)
-	$(SILENCE)$(QUIET)rm -rf $(TEST_DEP)
+	$(SILENCE)$(QUIET)$(REMOVE) $(TARGET)
+	$(SILENCE)$(QUIET)$(REMOVE) $(PRODUCTION_LIB)
+	$(SILENCE)$(QUIET)$(REMOVE) $(SRC_OBJ)
+	$(SILENCE)$(QUIET)$(REMOVE) $(SRC_DEP)
+	$(SILENCE)$(QUIET)$(REMOVE) $(TEST_OBJ)
+	$(SILENCE)$(QUIET)$(REMOVE) $(TEST_DEP)
