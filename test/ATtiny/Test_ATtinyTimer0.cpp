@@ -37,3 +37,12 @@ TEST(ATtinyTimer0, ItCanSetAlBitsInTimer0BitWidth)
 
     BYTES_EQUAL(expected, TCCR0A);
 }
+
+TEST(ATtinyTimer0, ItCanClearAlBitsInTimer0BitWidth)
+{
+    CLEAR_BITS(expected, BITMASK_T0_TIMER_BIT_WIDTH);
+
+    ATtinyTimer0_SetTimerBitWidth(T0_EIGHT_BIT);
+
+    BYTES_EQUAL(expected, TCCR0A);
+}
