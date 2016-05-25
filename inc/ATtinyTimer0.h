@@ -23,6 +23,7 @@ typedef enum
   T0_PRESCALE_FACTOR_1024 = 0b101,
   T0_EXTERNAL_T0_RISING   = 0b111
 } Timer0_PrescaleFactor;
+#define BITMASK_T0_PRESCALE_FACTOR ((1<<CS02) | (1<<CS01) | (1<<CS00))
 void ATtinyTimer0_SetPrescaleFactor(Timer0_PrescaleFactor prescaleFactor);
 
 void ATtinyTimer0_SetTimerCompareValue0A(u08 timerCompareValue);

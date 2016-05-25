@@ -14,7 +14,7 @@
 //***************//
 //*** Timer 0 ***//
 //***************//
-//Timer/Counter0 Control Register A
+// Timer/Counter0 Control Register A
 extern uint8_t TCCR0A;
 // #define TCCR0A _SFR_IO8(0x15)
 // #define WGM00 0  /* up to at least datasheet rev. B */
@@ -25,6 +25,13 @@ extern uint8_t TCCR0A;
 #define ICEN0 6
 #define TCW0 7
 
-
+// Timer/Counter0 Control Register B
+extern uint8_t TCCR0B;
+// #define TCCR0B  _SFR_IO8(0x33)
+#define CS00    0
+#define CS01    1
+#define CS02    2
+#define PSR0    3
+#define TSM     4
 
 #endif

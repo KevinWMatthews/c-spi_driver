@@ -16,6 +16,7 @@ TEST_GROUP(WhenSettingRegisterBits)
     {
         expected = 0;
         TCCR0A = 0;
+        TCCR0B = 0;
     }
 
     void teardown()
@@ -27,6 +28,7 @@ TEST(WhenSettingRegisterBits, ItClearsMockRegistersAfterSetup)
 {
     BYTES_EQUAL(0, expected);
     BYTES_EQUAL(0, TCCR0A);
+    BYTES_EQUAL(0, TCCR0B);
 }
 
 TEST(WhenSettingRegisterBits, ItCanSetAllBitsInTimerBitWidth)
@@ -47,6 +49,15 @@ TEST(WhenSettingRegisterBits, ItCanSetAllBitsInTimerOnMatch)
     BYTES_EQUAL(expected, TCCR0A);
 }
 
+TEST(WhenSettingRegisterBits, ItCanSetAllBitsInPrescaler)
+{
+    SET_BITS(expected, BITMASK_T0_PRESCALE_FACTOR);
+
+    ATtinyTimer0_SetPrescaleFactor(T0_EXTERNAL_T0_RISING);
+
+    BYTES_EQUAL(expected, TCCR0B);
+}
+
 
 
 TEST_GROUP(WhenClearingRegisterBits)
@@ -57,6 +68,7 @@ TEST_GROUP(WhenClearingRegisterBits)
     {
         expected = 0xff;
         TCCR0A = 0xff;
+        TCCR0B = 0xff;
     }
 
     void teardown()
@@ -68,6 +80,7 @@ TEST(WhenClearingRegisterBits, ItSetssMockRegistersAfterSetup)
 {
     BYTES_EQUAL(0xff, expected);
     BYTES_EQUAL(0xff, TCCR0A);
+    BYTES_EQUAL(0xff, TCCR0B);
 }
 
 TEST(WhenClearingRegisterBits, ItCanClearAllBitsInTimerBitWidth)
@@ -86,4 +99,13 @@ TEST(WhenClearingRegisterBits, ItCanClearAllBitsInTimerOnMatch)
     ATtinyTimer0_ClearTimerOnMatch(FALSE);
 
     BYTES_EQUAL(expected, TCCR0A);
+}
+
+TEST(WhenClearingRegisterBits, ItCanClearAllBitsInPrescaler)
+{
+    CLEAR_BITS(expected, BITMASK_T0_PRESCALE_FACTOR);
+
+    ATtinyTimer0_SetPrescaleFactor(T0_TIMER_STOPPED);
+
+    BYTES_EQUAL(expected, TCCR0B);
 }
