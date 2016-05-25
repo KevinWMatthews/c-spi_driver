@@ -11,6 +11,7 @@ typedef enum
 #define BITMASK_T0_TIMER_BIT_WIDTH (1<<TCW0)
 void ATtinyTimer0_SetTimerBitWidth(Timer0BitWidth timerBitWidth);
 
+#define BITMASK_T0_CLEAR_TIMER_ON_MATCH (1<<CTC0)
 void ATtinyTimer0_ClearTimerOnMatch(BOOL clearOnMatchFlag);
 
 typedef enum

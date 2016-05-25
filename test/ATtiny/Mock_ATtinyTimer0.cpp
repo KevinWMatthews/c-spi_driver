@@ -5,12 +5,6 @@ extern "C"
 
 #include "CppUTestExt/MockSupport.h"
 
-void ATtinyTimer0_ClearTimerOnMatch(BOOL clearOnMatchFlag)
-{
-    mock().actualCall("ATtinyTimer0_ClearTimerOnMatch")
-          .withParameter("clearOnMatchFlag", clearOnMatchFlag);
-}
-
 void ATtinyTimer0_SetPrescaleFactor(Timer0_PrescaleFactor prescaleFactor)
 {
     mock().actualCall("ATtinyTimer0_SetPrescaleFactor")
