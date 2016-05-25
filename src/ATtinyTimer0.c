@@ -16,3 +16,8 @@ void ATtinyTimer0_SetPrescaleFactor(Timer0_PrescaleFactor prescaleFactor)
 {
     SHIFT_AND_SET_BITMASK_TO(TCCR0B, prescaleFactor, BITMASK_T0_PRESCALE_FACTOR);
 }
+
+void ATtinyTimer0_SetTimerCompareValue0A(u08 timerCompareValue)
+{
+    OCR0A = timerCompareValue;
+}

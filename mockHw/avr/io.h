@@ -34,4 +34,10 @@ extern uint8_t TCCR0B;
 #define PSR0    3
 #define TSM     4
 
+// Timer/Counter0 Output Compare Register A
+extern uint8_t OCR0A;
+// #define OCR0A   _SFR_IO8(0x13)
+
+
+
 #endif
