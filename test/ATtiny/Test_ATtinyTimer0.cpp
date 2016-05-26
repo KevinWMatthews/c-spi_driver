@@ -97,7 +97,7 @@ TEST_GROUP(WhenClearingRegisterBits)
     }
 };
 
-TEST(WhenClearingRegisterBits, ItSetssMockRegistersAfterSetup)
+TEST(WhenClearingRegisterBits, ItSetsMockRegistersAfterSetup)
 {
     BYTES_EQUAL(0xff, expected);
     BYTES_EQUAL(0xff, TCCR0A);

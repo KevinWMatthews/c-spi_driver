@@ -10,6 +10,20 @@
 #include <stdint.h>
 
 
+//*********************************************//
+//*** Universial Serial Interface registers ***//
+//*********************************************//
+// USI Control Register
+extern uint8_t USICR;
+// #define USICR _SFR_IO8(0x0D)
+#define USITC  0
+#define USICLK 1
+#define USICS0 2
+#define USICS1 3
+#define USIWM0 4
+#define USIWM1 5
+#define USIOIE 6
+#define USISIE 7
 
 //***************//
 //*** Timer 0 ***//
