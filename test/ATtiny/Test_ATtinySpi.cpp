@@ -110,3 +110,44 @@ TEST(WhenClearingAllBits, ItCanClearAllBitsInIsTransmittingFlag)
     ATtinySpi_SetIsTransmittingFlag(FALSE);
     CHECK( !ATtinySpi_GetIsTransmittingFlag() );
 }
+
+
+
+TEST_GROUP(WhenSettingPinPositions)
+{
+    uint8_t expectedDDR;
+    uint8_t expectedUSIPP;
+    uint8_t expectedPORT;
+
+    void setup()
+    {
+        expectedDDR   = 0x5a;
+        expectedUSIPP = 0x5a;
+        expectedPORT  = 0x5a;
+        USIPP = 0x00;
+        DDRA  = 0x00;
+        PORTA = 0x00;
+    }
+
+    void teardown()
+    {
+    }
+};
+
+IGNORE_TEST(WhenSettingPinPositions, ItCanSetToMasterPortA)
+{
+    expectedDDR   = 0x00;
+    expectedUSIPP = 0x00;
+    expectedPORT  = 0x00;
+
+    SET_BIT_NUMBER(expectedUSIPP, USIPOS);
+    CLEAR_BIT_NUMBER(expectedDDR, USI_MISO_BIT_A);  //Input:   MISO
+    SET_BIT_NUMBER(expectedDDR, USI_MOSI_BIT_A);    //Output:  MOSI
+    SET_BIT_NUMBER(expectedDDR, USI_USCK_BIT_A);    //Output:  SCK
+    SET_BIT_NUMBER(expectedPORT, USI_MISO_BIT_A);   //Pull-up: MISO
+
+    ATtinySpi_ConfigureUsiPins(SPI_MASTER, SPI_PORTA_PINS);
+    BYTES_EQUAL(expectedUSIPP, USIPP);
+    BYTES_EQUAL(expectedDDR, DDRA);
+    BYTES_EQUAL(expectedPORT, PORTA);
+}

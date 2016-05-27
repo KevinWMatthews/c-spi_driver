@@ -10,6 +10,34 @@
 #include <stdint.h>
 
 
+
+//*****************//
+//*** Port pins ***//
+//*****************//
+extern uint8_t DDRA;
+// #define DDRA _SFR_IO8(0x1A)
+#define DDA0 0
+#define DDA1 1
+#define DDA2 2
+#define DDA3 3
+#define DDA4 4
+#define DDA5 5
+#define DDA6 6
+#define DDA7 7
+
+extern uint8_t PORTA;
+// #define PORTA _SFR_IO8(0x1B)
+#define PORTA0 0
+#define PORTA1 1
+#define PORTA2 2
+#define PORTA3 3
+#define PORTA4 4
+#define PORTA5 5
+#define PORTA6 6
+#define PORTA7 7
+
+
+
 //*********************************************//
 //*** Universial Serial Interface registers ***//
 //*********************************************//
@@ -24,6 +52,13 @@ extern uint8_t USICR;
 #define USIWM1 5
 #define USIOIE 6
 #define USISIE 7
+
+// USI Pin Position
+extern uint8_t USIPP;
+// #define USIPP _SFR_IO8(0x11)
+#define USIPOS 0
+
+
 
 //***************//
 //*** Timer 0 ***//

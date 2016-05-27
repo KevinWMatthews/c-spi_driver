@@ -19,6 +19,11 @@ void ATtinySpi_SetCounterOverflowInterrupts(BOOL enableInterrupts)
     SHIFT_AND_SET_BITMASK_TO(USICR, enableInterrupts, BITMASK_USI_COUNTER_OVERFLOW_INTERRUPTS);
 }
 
+void ATtinySpi_ConfigureUsiPins(Spi_DeviceType masterOrSlave, Spi_PinPosition pinPosition)
+{
+    //TODO
+}
+
 void ATtinySpi_SetIsTransmittingFlag(BOOL isTransmitting)
 {
     isTransmittingFlag = isTransmitting;
