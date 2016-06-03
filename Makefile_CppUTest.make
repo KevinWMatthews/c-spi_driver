@@ -6,6 +6,17 @@ SILENCE = @
 
 
 
+######################
+### Compiler flags ###
+######################
+CFLAGS += -Wall
+ifeq ($(FATAL_COMPILER_ERRORS),Y)
+	CFLAGS += -Wfatal-errors
+endif
+
+INCLUDE_FLAGS = $(addprefix -I, $(INC_DIRS))
+
+
 #############################
 ### Product Configuration ###
 #############################
@@ -15,7 +26,7 @@ TARGET_NAME = $(TEST_MODULE)
 include ModuleConfig_$(TEST_MODULE).make
 CPPUTEST_HOME = /usr/local
 
-INCLUDE_FLAGS = $(addprefix -I, $(INC_DIRS))
+# CppUTest flags
 TEST_INCLUDE_FLAGS = $(addprefix -I, $(TEST_DIRS))
 CPPFLAGS += -I$(CPPUTEST_HOME)/include
 CXXFLAGS += -include $(CPPUTEST_HOME)/include/CppUTest/MemoryLeakDetectorNewMacros.h
@@ -32,12 +43,9 @@ endif
 C_COMPILER = gcc
 CPP_COMPILER = g++
 ARCHIVER = ar
-CFLAGS += -Wall
 DEP_FLAGS = -MMD -MP
 MAKE_DIR = mkdir -p
 REMOVE = rm -rf
-
-IGNORE_MAKEFILE_ERROR_ON_LINE = -
 
 
 
@@ -99,7 +107,7 @@ endif
 
 test: $(TARGET)
 	@echo Executing unit tests for: $(TARGET)
-	$(IGNORE_MAKEFILE_ERROR_ON_LINE) $(SILENCE)./$(TARGET) -c
+	$(IGNORE_ERROR)$(SILENCE)./$(TARGET) -c
 
 # Be sure to link the test objects before the production library! This allows link-time substitution.
 $(TARGET): $(TEST_OBJ) $(PRODUCTION_LIB)

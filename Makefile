@@ -7,14 +7,22 @@ ALL_TEST_MODULES = \
 				   Spi
 
 
-CFLAGS = -Wfatal-errors
-
-export CFLAGS
 
 
 ##############################
 ### Makefile configuration ###
 ##############################
+# Set to 'Y' to cause a single compiler error to kill the make.
+FATAL_COMPILER_ERRORS = Y
+export FATAL_COMPILER_ERRORS
+
+# Set to 'Y' to suppress makefile errors when running unit tests.
+IGNORE_UNIT_TEST_ERRORS = N
+ifeq ($(IGNORE_UNIT_TEST_ERRORS),Y)
+	IGNORE_ERROR = -
+endif
+export IGNORE_ERROR
+
 # Set to 'Y' to suppress makefile messages when entering and leaving sub-makes.
 SUPPRESS_ENTERING_DIRECTORY_MESSAGE = Y
 ifeq ($(SUPPRESS_ENTERING_DIRECTORY_MESSAGE),Y)
