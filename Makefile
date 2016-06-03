@@ -25,11 +25,6 @@ TEST_MAKEFILE = Makefile_CppUTest.make
 MAKE = make $(NO_PRINT_DIRECTORY) --file
 CLEAR = clear
 
-# Pass makefile configuration to the submakes
-export NO_PRINT_DIRECTORY
-export TEST_MAKEFILE
-export MAKE
-
 
 
 #############################
@@ -52,19 +47,25 @@ endif
 ifeq ($(MAKECMDGOALS),clean)
 	SUBMAKE_TARGET = clean
 endif
+ifeq ($(MAKECMDGOALS),full_clean)
+	SUBMAKE_TARGET = full_clean
+endif
 
-.PHONY: test clean $(TEST_MODULES) clear
+.PHONY: test clean full_clean $(TEST_MODULES) screen_clear
 
-test: clear $(TEST_MODULES)
+test: screen_clear $(TEST_MODULES)
 	@echo "Built and tested: $(TEST_MODULES)"
 
 clean: $(TEST_MODULES)
 	@echo "Cleaned: $(TEST_MODULES)"
 
+full_clean: $(TEST_MODULES)
+	@echo "Fully cleaned: $(TEST_MODULES)"
+
 $(TEST_MODULES):
 # Using $@ trims the whitespace
-	$(SILENCE)$(MAKE) Makefile_$@.make $(SUBMAKE_TARGET) TEST_MODULE=$@
+	$(SILENCE)$(MAKE) $(TEST_MAKEFILE) $(SUBMAKE_TARGET) TEST_MODULE=$@
 
 # clear the terminal screen
-clear:
+screen_clear:
 	$(CLEAR)

@@ -11,12 +11,8 @@ SILENCE = @
 #############################
 TARGET_NAME = $(TEST_MODULE)
 
-# These are set by a higher-level makefile
-# SRC_DIRS =
-# INC_DIRS =
-TEST_DIRS = test/$(TEST_MODULE)
-BUILD_DIR = build
-OBJECT_DIR = obj
+# Include directory structure from specific module's makefile
+include ModuleConfig_$(TEST_MODULE).make
 CPPUTEST_HOME = /usr/local
 
 INCLUDE_FLAGS = $(addprefix -I, $(INC_DIRS))
@@ -99,7 +95,7 @@ endif
 ###########
 # Targets #
 ###########
-.PHONY: test rebuild clean
+.PHONY: test clean full_clean
 
 test: $(TARGET)
 	@echo Executing unit tests for: $(TARGET)
@@ -124,8 +120,6 @@ $(OBJECT_DIR)/%.o: %.c
 	$(SILENCE)$(QUIET)$(MAKE_DIR) $(dir $@)
 	$(SILENCE)$(C_COMPILER) $(DEP_FLAGS) -o $@ -c $< $(CFLAGS) $(INCLUDE_FLAGS)
 
-rebuild: clean test
-
 clean:
 	$(SILENCE)$(QUIET)$(REMOVE) $(TARGET)
 	$(SILENCE)$(QUIET)$(REMOVE) $(PRODUCTION_LIB)
@@ -133,3 +127,7 @@ clean:
 	$(SILENCE)$(QUIET)$(REMOVE) $(SRC_DEP)
 	$(SILENCE)$(QUIET)$(REMOVE) $(TEST_OBJ)
 	$(SILENCE)$(QUIET)$(REMOVE) $(TEST_DEP)
+
+full_clean:
+	$(SILENCE)$(QUIET)$(REMOVE) $(BUILD_DIR)
+	$(SILENCE)$(QUIET)$(REMOVE) $(OBJECT_DIR)
