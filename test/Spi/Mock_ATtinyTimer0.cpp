@@ -29,8 +29,8 @@ void ATtinyTimer0_SetTimerCompareValue0A(u08 timerCompareValue)
           .withParameter("timerCompareValue", timerCompareValue);
 }
 
-void ATtinyTimer0_SetTimerCompareInterrupt0A(BOOL enableInterrupt)
+void ATtinyTimer0_EnableTimerCompareInterrupt0A(BOOL enableInterrupt)
 {
-    mock().actualCall("ATtinyTimer0_SetTimerCompareInterrupt0A")
+    mock().actualCall("ATtinyTimer0_EnableTimerCompareInterrupt0A")
           .withParameter("enableInterrupt", enableInterrupt);
 }

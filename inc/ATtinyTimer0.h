@@ -25,6 +25,6 @@ void ATtinyTimer0_SetPrescaleFactor(Timer0_PrescaleFactor prescaleFactor);
 
 void ATtinyTimer0_SetTimerCompareValue0A(u08 timerCompareValue);
 
-void ATtinyTimer0_SetTimerCompareInterrupt0A(BOOL enableInterrupt);
+void ATtinyTimer0_EnableTimerCompareInterrupt0A(BOOL enableInterrupt);
 
 #endif

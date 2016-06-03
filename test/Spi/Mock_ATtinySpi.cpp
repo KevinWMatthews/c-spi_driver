@@ -24,9 +24,9 @@ void ATtinySpi_ConfigureUsiPins(Spi_DeviceType masterOrSlave, Spi_PinPosition pi
           .withParameter("pinPosition", pinPosition);
 }
 
-void ATtinySpi_SetCounterOverflowInterrupts(BOOL enableInterrupts)
+void ATtinySpi_EnableCounterOverflowInterrupts(BOOL enableInterrupts)
 {
-    mock().actualCall("ATtinySpi_SetCounterOverflowInterrupts")
+    mock().actualCall("ATtinySpi_EnableCounterOverflowInterrupts")
           .withParameter("enableInterrupts", enableInterrupts);
 }
 

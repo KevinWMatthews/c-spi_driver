@@ -34,7 +34,7 @@ TEST(SpiSlave, HardwareSetup)
     mock().expectOneCall("ATtinySpi_ConfigureUsiPins")
           .withParameter("masterOrSlave", SPI_SLAVE)
           .withParameter("pinPosition", SPI_PORTA_PINS);
-    mock().expectOneCall("ATtinySpi_SetCounterOverflowInterrupts")
+    mock().expectOneCall("ATtinySpi_EnableCounterOverflowInterrupts")
           .withParameter("enableInterrupts", TRUE);
     mock().expectOneCall("ATtinySpi_SetIsTransmittingFlag")
           .withParameter("isTransmitting", FALSE);

@@ -34,7 +34,7 @@ TEST(SpiMaster, HardwareSetup)
     mock().expectOneCall("ATtinySpi_ConfigureUsiPins")
           .withParameter("masterOrSlave", SPI_MASTER)
           .withParameter("pinPosition", SPI_PORTA_PINS);
-    mock().expectOneCall("ATtinySpi_SetCounterOverflowInterrupts")
+    mock().expectOneCall("ATtinySpi_EnableCounterOverflowInterrupts")
           .withParameter("enableInterrupts", TRUE);
     mock().expectOneCall("ATtinySpi_SetIsTransmittingFlag")
           .withParameter("isTransmitting", FALSE);
@@ -48,7 +48,7 @@ TEST(SpiMaster, HardwareSetup)
           .withParameter("prescaleFactor", T0_PRESCALE_FACTOR_64);
     mock().expectOneCall("ATtinyTimer0_SetTimerCompareValue0A")
           .withParameter("timerCompareValue", 125);
-    mock().expectOneCall("ATtinyTimer0_SetTimerCompareInterrupt0A")
+    mock().expectOneCall("ATtinyTimer0_EnableTimerCompareInterrupt0A")
           .withParameter("enableInterrupt", FALSE);
 
     Spi_HwSetup();

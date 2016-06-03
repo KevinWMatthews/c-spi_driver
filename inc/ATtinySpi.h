@@ -32,7 +32,7 @@ typedef enum
 } Spi_DeviceType;
 void ATtinySpi_ConfigureUsiPins(Spi_DeviceType masterOrSlave, Spi_PinPosition pinPosition);
 
-void ATtinySpi_SetCounterOverflowInterrupts(BOOL enableInterrupts);
+void ATtinySpi_EnableCounterOverflowInterrupts(BOOL enableInterrupts);
 
 void ATtinySpi_SetIsTransmittingFlag(BOOL isTransmitting);
 BOOL ATtinySpi_GetIsTransmittingFlag(void);

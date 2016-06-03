@@ -49,7 +49,7 @@ TEST(WhenSettingAllBits, ItCanSetAllBitsInCounterOverflowInterrupts)
 {
     SET_BITMASK(expected, BITMASK_USI_COUNTER_OVERFLOW_INTERRUPTS);
 
-    ATtinySpi_SetCounterOverflowInterrupts(TRUE);
+    ATtinySpi_EnableCounterOverflowInterrupts(TRUE);
     BYTES_EQUAL(expected, USICR);
 }
 
@@ -101,7 +101,7 @@ TEST(WhenClearingAllBits, ItCanClearAllBitsInCounterOverflowInterrupts)
 {
     CLEAR_BITMASK(expected, BITMASK_USI_COUNTER_OVERFLOW_INTERRUPTS);
 
-    ATtinySpi_SetCounterOverflowInterrupts(FALSE);
+    ATtinySpi_EnableCounterOverflowInterrupts(FALSE);
     BYTES_EQUAL(expected, USICR);
 }
 

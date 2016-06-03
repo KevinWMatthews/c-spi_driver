@@ -8,7 +8,7 @@ static void hardwareSetup(void)
     ATtinySpi_SetWireMode(USI_THREE_WIRE);
     ATtinySpi_SetClockSource(USI_EXTERNAL_POSITIVE_EDGE_SOFTWARE_STROBE);
     ATtinySpi_ConfigureUsiPins(SPI_MASTER, SPI_PORTA_PINS);
-    ATtinySpi_SetCounterOverflowInterrupts(TRUE);
+    ATtinySpi_EnableCounterOverflowInterrupts(TRUE);
     ATtinySpi_SetIsTransmittingFlag(FALSE);
 
     // Set up ATtinyTimer0 parameters
@@ -16,7 +16,7 @@ static void hardwareSetup(void)
     ATtinyTimer0_ClearTimerOnMatch(TRUE);
     ATtinyTimer0_SetPrescaleFactor(T0_PRESCALE_FACTOR_64);
     ATtinyTimer0_SetTimerCompareValue0A(125);
-    ATtinyTimer0_SetTimerCompareInterrupt0A(FALSE);
+    ATtinyTimer0_EnableTimerCompareInterrupt0A(FALSE);
 }
 
 void Spi_CreateMaster(void)

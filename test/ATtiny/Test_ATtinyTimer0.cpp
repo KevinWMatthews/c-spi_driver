@@ -73,7 +73,7 @@ TEST(WhenSettingRegisterBits, ItCanSetAllBitsInEnableTimerCompareInterrupt)
 {
     SET_BITMASK(expected, BITMASK_T0_COMPARE_INTERRUPT_0A);
 
-    ATtinyTimer0_SetTimerCompareInterrupt0A(TRUE);
+    ATtinyTimer0_EnableTimerCompareInterrupt0A(TRUE);
 
     BYTES_EQUAL(expected, TIMSK);
 }
@@ -144,7 +144,7 @@ TEST(WhenClearingRegisterBits, ItCanClearAllBitsInEnableTimerCompareInterrupt)
 {
     CLEAR_BITMASK(expected, BITMASK_T0_COMPARE_INTERRUPT_0A);
 
-    ATtinyTimer0_SetTimerCompareInterrupt0A(FALSE);
+    ATtinyTimer0_EnableTimerCompareInterrupt0A(FALSE);
 
     BYTES_EQUAL(expected, TIMSK);
 }
