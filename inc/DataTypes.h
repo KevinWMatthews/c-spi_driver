@@ -11,4 +11,6 @@ typedef enum
     TRUE  = 1
 } BOOL;
 
+typedef volatile u08 * RegisterPointer;
+
 #endif
