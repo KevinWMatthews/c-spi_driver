@@ -1,4 +1,5 @@
 #include "ATtinyTimer0.h"
+#include "ATtinyTimer0Private.h"
 #include "BitManip.h"
 #include <avr/io.h>
 

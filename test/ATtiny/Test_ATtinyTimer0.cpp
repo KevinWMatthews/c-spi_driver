@@ -1,6 +1,7 @@
 extern "C"
 {
 #include "ATtinyTimer0.h"
+#include "ATtinyTimer0Private.h"
 #include <avr/io.h>
 #include "BitManip.h"
 }

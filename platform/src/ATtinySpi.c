@@ -1,4 +1,5 @@
 #include "ATtinySpi.h"
+#include "ATtinySpiPrivate.h"
 #include <avr/io.h>
 #include "BitManip.h"
 #include "ChipFunctions.h"

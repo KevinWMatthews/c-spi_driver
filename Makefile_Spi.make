@@ -7,7 +7,7 @@ SILENCE = @
 ### Project configuration ###
 #############################
 SRC_DIRS = src 
-INC_DIRS = inc mockHw ../bit_manip/inc
+INC_DIRS = inc ../bit_manip/inc
 
 # Pass project configuration to the submake
 export SRC_DIRS

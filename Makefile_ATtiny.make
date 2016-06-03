@@ -6,8 +6,8 @@ SILENCE = @
 #############################
 ### Project configuration ###
 #############################
-SRC_DIRS = src mockHw/avr
-INC_DIRS = inc mockHw ../bit_manip/inc
+SRC_DIRS = src platform/src mockHw/avr
+INC_DIRS = inc platform/inc mockHw ../bit_manip/inc
 
 # Pass project configuration to the submake
 export SRC_DIRS
