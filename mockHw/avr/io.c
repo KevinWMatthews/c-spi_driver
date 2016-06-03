@@ -2,6 +2,8 @@
 
 uint8_t DDRA;
 uint8_t PORTA;
+volatile uint8_t DDRB;
+volatile uint8_t PORTB;
 
 //*** Universial Serial Interface registers ***//
 uint8_t USICR;

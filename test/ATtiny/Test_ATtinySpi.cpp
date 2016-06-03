@@ -151,3 +151,22 @@ TEST(WhenSettingPinPositions, ItCanSetToMasterPortA)
     BYTES_EQUAL(expectedDDR, DDRA);
     BYTES_EQUAL(expectedPORT, PORTA);
 }
+
+TEST(WhenSettingPinPositions, SetMasterPinPositionToPortB)
+{
+    expectedDDR   = 0x00;
+    expectedUSIPP = 0x00;
+    expectedPORT  = 0x00;
+
+    CLEAR_BIT_NUMBER(expectedUSIPP, USIPOS);
+    CLEAR_BIT_NUMBER(expectedDDR, USI_MISO_BIT_B);  //Input:   MISO
+    SET_BIT_NUMBER(expectedDDR, USI_MOSI_BIT_B);    //Output:  MOSI
+    SET_BIT_NUMBER(expectedDDR, USI_USCK_BIT_B);    //Output:  USCK
+    SET_BIT_NUMBER(expectedPORT, USI_MISO_BIT_B);   //Pull-up: MISO
+
+    ATtinySpi_ConfigureUsiPins(SPI_MASTER, SPI_PORTB_PINS);
+
+    BYTES_EQUAL(expectedUSIPP, USIPP);
+    BYTES_EQUAL(expectedDDR, DDRB);
+    BYTES_EQUAL(expectedPORT, PORTB);
+}

@@ -22,11 +22,22 @@ void ATtinySpi_SetCounterOverflowInterrupts(BOOL enableInterrupts)
 
 void ATtinySpi_ConfigureUsiPins(Spi_DeviceType masterOrSlave, Spi_PinPosition pinPosition)
 {
-    SHIFT_AND_SET_BITMASK(USIPP, pinPosition, BITMASK_USI_PIN_POSITION);
-    ChipFunctions_SetPinAsInput(&DDRA, USI_MISO_BIT_A);
-    ChipFunctions_SetPinAsOutput(&DDRA, USI_MOSI_BIT_A);
-    ChipFunctions_SetPinAsOutput(&DDRA, USI_USCK_BIT_A);
-    ChipFunctions_EnablePullUpResistor(&PORTA, USI_MISO_BIT_A);
+    if (pinPosition == SPI_PORTA_PINS)
+    {
+        SHIFT_AND_SET_BITMASK(USIPP, pinPosition, BITMASK_USI_PIN_POSITION);
+        ChipFunctions_SetPinAsInput(&DDRA, USI_MISO_BIT_A);
+        ChipFunctions_SetPinAsOutput(&DDRA, USI_MOSI_BIT_A);
+        ChipFunctions_SetPinAsOutput(&DDRA, USI_USCK_BIT_A);
+        ChipFunctions_EnablePullUpResistor(&PORTA, USI_MISO_BIT_A);
+    }
+    else if (pinPosition == SPI_PORTB_PINS)
+    {
+        SHIFT_AND_SET_BITMASK(USIPP, pinPosition, BITMASK_USI_PIN_POSITION);
+        ChipFunctions_SetPinAsInput(&DDRB, USI_MISO_BIT_B);
+        ChipFunctions_SetPinAsOutput(&DDRB, USI_MOSI_BIT_B);
+        ChipFunctions_SetPinAsOutput(&DDRB, USI_USCK_BIT_B);
+        ChipFunctions_EnablePullUpResistor(&PORTB, USI_MISO_BIT_B);
+    }
 }
 
 void ATtinySpi_SetIsTransmittingFlag(BOOL isTransmitting)
