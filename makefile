@@ -46,7 +46,8 @@ endif
 test: clear $(TEST_MODULE)
 
 $(TEST_MODULE):
-	$(SILENCE)$(MAKE) $(TEST_MAKEFILE) $(SUBMAKE_TARGET) TEST_MODULE=$@
+	make --no-print-directory Makefile_ATtiny.make
+#$(SILENCE)$(MAKE) $(TEST_MAKEFILE) $(SUBMAKE_TARGET) TEST_MODULE=$@
 
 clean: $(TEST_MODULE)
 
