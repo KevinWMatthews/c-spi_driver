@@ -24,13 +24,13 @@ void ATtinySpi_SetClockSource(Usi_ClockSource clockSource);
 
 typedef enum
 {
-  SPI_PORTB_PINS = 0,
-  SPI_PORTA_PINS = 1
+    SPI_PORTB_PINS = 0,
+    SPI_PORTA_PINS = 1
 } Spi_PinPosition;
 typedef enum
 {
-  SPI_MASTER = 0,
-  SPI_SLAVE  = 1
+    SPI_MASTER = 0,
+    SPI_SLAVE  = 1
 } Spi_DeviceType;
 #define USI_MISO_BIT_A 0
 #define USI_MOSI_BIT_A 1

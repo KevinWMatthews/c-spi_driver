@@ -70,11 +70,11 @@ TEST(WhenSettingRegisterBits, ItCanSetMaxTimerCompareValue)
 
 TEST(WhenSettingRegisterBits, ItCanSetAllBitsInEnableTimerCompareInterrupt)
 {
-  SET_BITMASK(expected, BITMASK_T0_COMPARE_INTERRUPT_0A);
+    SET_BITMASK(expected, BITMASK_T0_COMPARE_INTERRUPT_0A);
 
-  ATtinyTimer0_SetTimerCompareInterrupt0A(TRUE);
+    ATtinyTimer0_SetTimerCompareInterrupt0A(TRUE);
 
-  BYTES_EQUAL(expected, TIMSK);
+    BYTES_EQUAL(expected, TIMSK);
 }
 
 
@@ -139,12 +139,11 @@ TEST(WhenClearingRegisterBits, ItCanSetMinTimerCompareValue)
     LONGS_EQUAL(OCR0A, 0);
 }
 
-
 TEST(WhenClearingRegisterBits, ItCanClearAllBitsInEnableTimerCompareInterrupt)
 {
-  CLEAR_BITMASK(expected, BITMASK_T0_COMPARE_INTERRUPT_0A);
+    CLEAR_BITMASK(expected, BITMASK_T0_COMPARE_INTERRUPT_0A);
 
-  ATtinyTimer0_SetTimerCompareInterrupt0A(FALSE);
+    ATtinyTimer0_SetTimerCompareInterrupt0A(FALSE);
 
-  BYTES_EQUAL(expected, TIMSK);
+    BYTES_EQUAL(expected, TIMSK);
 }
