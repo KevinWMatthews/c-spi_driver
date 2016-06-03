@@ -11,8 +11,9 @@ SILENCE = @
 #############################
 TARGET_NAME = $(TEST_MODULE)
 
-# SRC_DIRS = src mockHw/avr
-# INC_DIRS = inc mockHw ../bit_manip/inc
+# These are set by a higher-level makefile
+# SRC_DIRS =
+# INC_DIRS =
 TEST_DIRS = test/$(TEST_MODULE)
 BUILD_DIR = build
 OBJECT_DIR = obj
@@ -116,7 +117,7 @@ $(PRODUCTION_LIB): $(SRC_OBJ)
 # Compile test .cpp files
 $(OBJECT_DIR)/%.o: %.cpp
 	$(SILENCE)$(QUIET)$(MAKE_DIR) $(dir $@)
-	$(SILENCE)$(CPP_COMPILER) $(DEP_FLAGS) -o $@ -c $< $(INCLUDE_FLAGS) $(TEST_INCLUDE_FLAGS)
+	$(SILENCE)$(CPP_COMPILER) $(DEP_FLAGS) -o $@ -c $< $(CFLAGS) $(INCLUDE_FLAGS) $(TEST_INCLUDE_FLAGS)
 
 # Compile source .c files
 $(OBJECT_DIR)/%.o: %.c

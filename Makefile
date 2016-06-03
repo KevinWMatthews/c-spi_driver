@@ -7,6 +7,10 @@ ALL_TEST_MODULES = \
 				   Spi
 
 
+CFLAGS = -Wfatal-errors
+
+export CFLAGS
+
 
 ##############################
 ### Makefile configuration ###
