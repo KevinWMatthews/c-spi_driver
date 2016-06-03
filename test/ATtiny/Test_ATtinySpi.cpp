@@ -122,12 +122,14 @@ TEST_GROUP(WhenSettingPinPositions)
 
     void setup()
     {
-        expectedDDR   = 0x5a;
         expectedUSIPP = 0x5a;
+        expectedDDR   = 0x5a;
         expectedPORT  = 0x5a;
         USIPP = 0x00;
         DDRA  = 0x00;
         PORTA = 0x00;
+        DDRB  = 0x00;
+        PORTB = 0x00;
     }
 
     void teardown()
@@ -135,7 +137,7 @@ TEST_GROUP(WhenSettingPinPositions)
     }
 };
 
-TEST(WhenSettingPinPositions, ItCanSetToMasterPortA)
+TEST(WhenSettingPinPositions, SetMasterPinPositionToPortA)
 {
     expectedDDR   = 0x00;
     expectedUSIPP = 0x00;
@@ -148,6 +150,7 @@ TEST(WhenSettingPinPositions, ItCanSetToMasterPortA)
     SET_BIT_NUMBER(expectedPORT, USI_MISO_BIT_A);   //Pull-up: MISO
 
     ATtinySpi_ConfigureUsiPins(SPI_MASTER, SPI_PORTA_PINS);
+
     BYTES_EQUAL(expectedUSIPP, USIPP);
     BYTES_EQUAL(expectedDDR, DDRA);
     BYTES_EQUAL(expectedPORT, PORTA);
@@ -166,6 +169,46 @@ TEST(WhenSettingPinPositions, SetMasterPinPositionToPortB)
     SET_BIT_NUMBER(expectedPORT, USI_MISO_BIT_B);   //Pull-up: MISO
 
     ATtinySpi_ConfigureUsiPins(SPI_MASTER, SPI_PORTB_PINS);
+
+    BYTES_EQUAL(expectedUSIPP, USIPP);
+    BYTES_EQUAL(expectedDDR, DDRB);
+    BYTES_EQUAL(expectedPORT, PORTB);
+}
+
+TEST(WhenSettingPinPositions, SetSlavePinPositionToPortA)
+{
+    expectedDDR   = 0x00;
+    expectedUSIPP = 0x00;
+    expectedPORT  = 0x00;
+
+    SET_BIT_NUMBER(expectedUSIPP, USIPOS);
+    CLEAR_BIT_NUMBER(expectedDDR, USI_MISO_BIT_A);  //Input:  MISO
+    SET_BIT_NUMBER(expectedDDR, USI_MOSI_BIT_A);    //Output: MOSI
+    CLEAR_BIT_NUMBER(expectedDDR, USI_USCK_BIT_A);  //Input:  USCK
+    SET_BIT_NUMBER(expectedPORT, USI_MISO_BIT_A);   //Pull-up: MISO
+    SET_BIT_NUMBER(expectedPORT, USI_USCK_BIT_A);   //Pull-up: USCK
+
+    ATtinySpi_ConfigureUsiPins(SPI_SLAVE, SPI_PORTA_PINS);
+
+    BYTES_EQUAL(expectedUSIPP, USIPP);
+    BYTES_EQUAL(expectedDDR, DDRA);
+    BYTES_EQUAL(expectedPORT, PORTA);
+}
+
+TEST(WhenSettingPinPositions, SetSlavePinPositionToPortB)
+{
+    expectedDDR   = 0x00;
+    expectedUSIPP = 0x00;
+    expectedPORT  = 0x00;
+
+    CLEAR_BIT_NUMBER(expectedUSIPP, USIPOS);
+    CLEAR_BIT_NUMBER(expectedDDR, USI_MISO_BIT_B);  //Input:  MISO
+    SET_BIT_NUMBER(expectedDDR, USI_MOSI_BIT_B);    //Output: MOSI
+    CLEAR_BIT_NUMBER(expectedDDR, USI_USCK_BIT_B);  //Input:  USCK
+    SET_BIT_NUMBER(expectedPORT, USI_MISO_BIT_B);   //Pull-up: MISO
+    SET_BIT_NUMBER(expectedPORT, USI_USCK_BIT_B);   //Pull-up: USCK
+
+    ATtinySpi_ConfigureUsiPins(SPI_SLAVE, SPI_PORTB_PINS);
 
     BYTES_EQUAL(expectedUSIPP, USIPP);
     BYTES_EQUAL(expectedDDR, DDRB);
