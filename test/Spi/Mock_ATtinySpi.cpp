@@ -35,3 +35,13 @@ void ATtinySpi_SetIsTransmittingFlag(BOOL isTransmitting)
     mock().actualCall("ATtinySpi_SetIsTransmittingFlag")
           .withParameter("isTransmitting", isTransmitting);
 }
+
+void ATtinySpi_ClearCounterOverflowInterruptFlag(void)
+{
+    mock().actualCall("ATtinySpi_ClearCounterOverflowInterruptFlag");
+}
+
+void ATtinySpi_SaveInputData(void)
+{
+    mock().actualCall("ATtinySpi_SaveInputData");
+}

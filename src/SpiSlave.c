@@ -10,7 +10,15 @@ static void hardwareSetup(void)
     ATtinySpi_SetIsTransmittingFlag(FALSE);
 }
 
+static void usiOverflowInterrupt(void)
+{
+    ATtinySpi_ClearCounterOverflowInterruptFlag();
+    ATtinySpi_SetIsTransmittingFlag(FALSE);
+    ATtinySpi_SaveInputData();
+}
+
 void Spi_CreateSlave(void)
 {
     interface.hardwareSetup = hardwareSetup;
+    interface.usiOverflowInterrupt = usiOverflowInterrupt;
 }

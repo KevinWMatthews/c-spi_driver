@@ -19,7 +19,16 @@ static void hardwareSetup(void)
     ATtinyTimer0_EnableTimerCompareInterrupt0A(FALSE);
 }
 
+static void usiOverflowInterrupt(void)
+{
+    ATtinyTimer0_EnableTimerCompareInterrupt0A(FALSE);
+    ATtinySpi_ClearCounterOverflowInterruptFlag();
+    ATtinySpi_SetIsTransmittingFlag(FALSE);
+    ATtinySpi_SaveInputData();
+}
+
 void Spi_CreateMaster(void)
 {
     interface.hardwareSetup = hardwareSetup;
+    interface.usiOverflowInterrupt = usiOverflowInterrupt;
 }

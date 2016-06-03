@@ -43,3 +43,13 @@ TEST(SpiSlave, HardwareSetup)
 
     Spi_HwSetup();
 }
+
+TEST(SpiSlave, UsiOverflowInterrupt)
+{
+    mock().expectOneCall("ATtinySpi_ClearCounterOverflowInterruptFlag");
+    mock().expectOneCall("ATtinySpi_SetIsTransmittingFlag")
+        .withParameter("isTransmitting", FALSE);
+    mock().expectOneCall("ATtinySpi_SaveInputData");
+
+    Spi_UsiOverflowInterrupt();
+}

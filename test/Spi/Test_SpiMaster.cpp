@@ -53,3 +53,15 @@ TEST(SpiMaster, HardwareSetup)
 
     Spi_HwSetup();
 }
+
+TEST(SpiMaster, UsiOverflowInterrupt)
+{
+    mock().expectOneCall("ATtinyTimer0_EnableTimerCompareInterrupt0A")
+        .withParameter("enableInterrupt", FALSE);
+    mock().expectOneCall("ATtinySpi_ClearCounterOverflowInterruptFlag");
+    mock().expectOneCall("ATtinySpi_SetIsTransmittingFlag")
+        .withParameter("isTransmitting", FALSE);
+    mock().expectOneCall("ATtinySpi_SaveInputData");
+
+    Spi_UsiOverflowInterrupt();
+}

@@ -7,3 +7,8 @@ void Spi_HwSetup(void)
 {
     interface.hardwareSetup();
 }
+
+void Spi_UsiOverflowInterrupt(void)
+{
+    interface.usiOverflowInterrupt();
+}
