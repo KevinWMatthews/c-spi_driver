@@ -1,8 +1,8 @@
-#include "SpiHw.h"
+#include "Spi.h"
 #include "ATtinySpi.h"
 #include "ATtinyTimer0.h"
 
-void SpiHw_SetupAsSlave(void)
+void Spi_SetupAsSlave(void)
 {
     ATtinySpi_SetWireMode(USI_THREE_WIRE);
     ATtinySpi_SetClockSource(USI_EXTERNAL_POSITIVE_EDGE_SOFTWARE_STROBE);
@@ -11,7 +11,7 @@ void SpiHw_SetupAsSlave(void)
     ATtinySpi_SetIsTransmittingFlag(FALSE);
 }
 
-void SpiHw_SetupAsMaster(void)
+void Spi_SetupAsMaster(void)
 {
     // Set up ATtinySpi parameters
     ATtinySpi_SetWireMode(USI_THREE_WIRE);

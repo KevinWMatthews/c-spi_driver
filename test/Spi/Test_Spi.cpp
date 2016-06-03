@@ -1,11 +1,11 @@
 extern "C"
 {
-#include "SpiHw.h"
+#include "Spi.h"
 #include "ATtinySpi.h"
 #include "ATtinyTimer0.h"
 }
 
-#include "Test_SpiHw.h"
+#include "Test_Spi.h"
 #include "CppUTest/TestHarness.h"
 #include "CppUTestExt/MockSupport.h"
 
@@ -37,12 +37,12 @@ TEST(WhenInitializingHardware, ItCanCompleteSlaveSetupOnPortA)
     mock().expectOneCall("ATtinySpi_SetIsTransmittingFlag")
           .withParameter("isTransmitting", FALSE);
 
-    SpiHw_SetupAsSlave();
+    Spi_SetupAsSlave();
 }
 
 TEST(WhenInitializingHardware, ItCanCompleteMasterSetupOnPortA)
 {
-  //Set up SpiHw
+  //Set up Spi
   mock().expectOneCall("ATtinySpi_SetWireMode")
         .withParameter("wireMode", USI_THREE_WIRE);
   mock().expectOneCall("ATtinySpi_SetClockSource")
@@ -67,5 +67,5 @@ TEST(WhenInitializingHardware, ItCanCompleteMasterSetupOnPortA)
   mock().expectOneCall("ATtinyTimer0_SetTimerCompareInterrupt0A")
         .withParameter("enableInterrupt", FALSE);
 
-  SpiHw_SetupAsMaster();
+  Spi_SetupAsMaster();
 }
