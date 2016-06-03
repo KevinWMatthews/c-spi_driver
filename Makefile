@@ -3,6 +3,7 @@ SILENCE = @
 
 ALL_TEST_MODULES = \
 				   ATtiny \
+				   ChipFunctions \
 				   Spi
 
 
