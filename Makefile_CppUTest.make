@@ -101,7 +101,6 @@ endif
 .PHONY: test rebuild clean
 
 test: $(TARGET)
-	@echo
 	@echo Executing unit tests for: $(TARGET)
 	$(IGNORE_MAKEFILE_ERROR_ON_LINE) $(SILENCE)./$(TARGET) -c
 

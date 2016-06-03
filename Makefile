@@ -3,7 +3,7 @@ SILENCE = @
 
 ALL_TEST_MODULES = \
 				   ATtiny \
-				   SpiHw
+				   Spi
 
 
 
@@ -16,10 +16,14 @@ ifeq ($(SUPPRESS_ENTERING_DIRECTORY_MESSAGE),Y)
 	NO_PRINT_DIRECTORY = --no-print-directory
 endif
 
-
-
-TEST_MAKEFILE = makefile_cpputest.make
+TEST_MAKEFILE = Makefile_CppUTest.make
 MAKE = make $(NO_PRINT_DIRECTORY) --file
+CLEAR = clear
+
+# Pass makefile configuration to the submakes
+export NO_PRINT_DIRECTORY
+export TEST_MAKEFILE
+export MAKE
 
 
 
@@ -27,10 +31,16 @@ MAKE = make $(NO_PRINT_DIRECTORY) --file
 ### Auto-generated values ###
 #############################
 # If user did not specify a module to test, test all of them.
-ifeq ($(strip $(TEST_MODULE)),)
-	TEST_MODULE = $(ALL_TEST_MODULES)
+ifeq ($(strip $(TEST_MODULES)),)
+	TEST_MODULES = $(ALL_TEST_MODULES)
 endif
 
+
+
+###############
+### Targets ###
+###############
+# Generating the target for the submake in this fashion enables us to use the TEST_MODULES target.
 ifeq ($(MAKECMDGOALS),test)
 	SUBMAKE_TARGET = test
 endif
@@ -38,19 +48,18 @@ ifeq ($(MAKECMDGOALS),clean)
 	SUBMAKE_TARGET = clean
 endif
 
-###############
-### Targets ###
-###############
-.PHONY: $(TEST_MODULE) clear
+.PHONY: test clean $(TEST_MODULES) clear
 
-test: clear $(TEST_MODULE)
+test: clear $(TEST_MODULES)
+	@echo "Built and tested: $(TEST_MODULES)"
 
-$(TEST_MODULE):
-	make --no-print-directory Makefile_ATtiny.make
-#$(SILENCE)$(MAKE) $(TEST_MAKEFILE) $(SUBMAKE_TARGET) TEST_MODULE=$@
+clean: $(TEST_MODULES)
+	@echo "Cleaned: $(TEST_MODULES)"
 
-clean: $(TEST_MODULE)
+$(TEST_MODULES):
+# Using $@ trims the whitespace
+	$(SILENCE)$(MAKE) Makefile_$@.make $(SUBMAKE_TARGET) TEST_MODULE=$@
 
 # clear the terminal screen
 clear:
-	@clear
+	$(CLEAR)
