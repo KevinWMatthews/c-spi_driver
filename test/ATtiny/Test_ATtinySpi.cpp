@@ -134,7 +134,7 @@ TEST_GROUP(WhenSettingPinPositions)
     }
 };
 
-IGNORE_TEST(WhenSettingPinPositions, ItCanSetToMasterPortA)
+TEST(WhenSettingPinPositions, ItCanSetToMasterPortA)
 {
     expectedDDR   = 0x00;
     expectedUSIPP = 0x00;

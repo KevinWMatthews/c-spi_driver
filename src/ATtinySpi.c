@@ -1,6 +1,7 @@
 #include "ATtinySpi.h"
 #include <avr/io.h>
 #include "BitManip.h"
+#include "ChipFunctions.h"
 
 static BOOL isTransmittingFlag = FALSE;
 
@@ -21,7 +22,11 @@ void ATtinySpi_SetCounterOverflowInterrupts(BOOL enableInterrupts)
 
 void ATtinySpi_ConfigureUsiPins(Spi_DeviceType masterOrSlave, Spi_PinPosition pinPosition)
 {
-    //TODO
+    SHIFT_AND_SET_BITMASK(USIPP, pinPosition, BITMASK_USI_PIN_POSITION);
+    ChipFunctions_SetPinAsInput(&DDRA, USI_MISO_BIT_A);
+    ChipFunctions_SetPinAsOutput(&DDRA, USI_MOSI_BIT_A);
+    ChipFunctions_SetPinAsOutput(&DDRA, USI_USCK_BIT_A);
+    ChipFunctions_EnablePullUpResistor(&PORTA, USI_MISO_BIT_A);
 }
 
 void ATtinySpi_SetIsTransmittingFlag(BOOL isTransmitting)
