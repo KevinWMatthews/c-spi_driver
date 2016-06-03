@@ -37,7 +37,7 @@ TEST(WhenSettingRegisterBits, ItClearsMockRegistersAfterSetup)
 
 TEST(WhenSettingRegisterBits, ItCanSetAllBitsInTimerBitWidth)
 {
-    SET_BITS(expected, BITMASK_T0_TIMER_BIT_WIDTH);
+    SET_BITMASK(expected, BITMASK_T0_TIMER_BIT_WIDTH);
 
     ATtinyTimer0_SetTimerBitWidth(T0_SIXTEEN_BIT);
 
@@ -46,7 +46,7 @@ TEST(WhenSettingRegisterBits, ItCanSetAllBitsInTimerBitWidth)
 
 TEST(WhenSettingRegisterBits, ItCanSetAllBitsInTimerOnMatch)
 {
-    SET_BITS(expected, BITMASK_T0_CLEAR_TIMER_ON_MATCH);
+    SET_BITMASK(expected, BITMASK_T0_CLEAR_TIMER_ON_MATCH);
 
     ATtinyTimer0_ClearTimerOnMatch(TRUE);
 
@@ -55,7 +55,7 @@ TEST(WhenSettingRegisterBits, ItCanSetAllBitsInTimerOnMatch)
 
 TEST(WhenSettingRegisterBits, ItCanSetAllBitsInPrescaler)
 {
-    SET_BITS(expected, BITMASK_T0_PRESCALE_FACTOR);
+    SET_BITMASK(expected, BITMASK_T0_PRESCALE_FACTOR);
 
     ATtinyTimer0_SetPrescaleFactor(T0_EXTERNAL_T0_RISING);
 
@@ -70,7 +70,7 @@ TEST(WhenSettingRegisterBits, ItCanSetMaxTimerCompareValue)
 
 TEST(WhenSettingRegisterBits, ItCanSetAllBitsInEnableTimerCompareInterrupt)
 {
-  SET_BITS(expected, BITMASK_T0_COMPARE_INTERRUPT_0A);
+  SET_BITMASK(expected, BITMASK_T0_COMPARE_INTERRUPT_0A);
 
   ATtinyTimer0_SetTimerCompareInterrupt0A(TRUE);
 
@@ -108,7 +108,7 @@ TEST(WhenClearingRegisterBits, ItSetsMockRegistersAfterSetup)
 
 TEST(WhenClearingRegisterBits, ItCanClearAllBitsInTimerBitWidth)
 {
-    CLEAR_BITS(expected, BITMASK_T0_TIMER_BIT_WIDTH);
+    CLEAR_BITMASK(expected, BITMASK_T0_TIMER_BIT_WIDTH);
 
     ATtinyTimer0_SetTimerBitWidth(T0_EIGHT_BIT);
 
@@ -117,7 +117,7 @@ TEST(WhenClearingRegisterBits, ItCanClearAllBitsInTimerBitWidth)
 
 TEST(WhenClearingRegisterBits, ItCanClearAllBitsInTimerOnMatch)
 {
-    CLEAR_BITS(expected, BITMASK_T0_CLEAR_TIMER_ON_MATCH);
+    CLEAR_BITMASK(expected, BITMASK_T0_CLEAR_TIMER_ON_MATCH);
 
     ATtinyTimer0_ClearTimerOnMatch(FALSE);
 
@@ -126,7 +126,7 @@ TEST(WhenClearingRegisterBits, ItCanClearAllBitsInTimerOnMatch)
 
 TEST(WhenClearingRegisterBits, ItCanClearAllBitsInPrescaler)
 {
-    CLEAR_BITS(expected, BITMASK_T0_PRESCALE_FACTOR);
+    CLEAR_BITMASK(expected, BITMASK_T0_PRESCALE_FACTOR);
 
     ATtinyTimer0_SetPrescaleFactor(T0_TIMER_STOPPED);
 
@@ -142,7 +142,7 @@ TEST(WhenClearingRegisterBits, ItCanSetMinTimerCompareValue)
 
 TEST(WhenClearingRegisterBits, ItCanClearAllBitsInEnableTimerCompareInterrupt)
 {
-  CLEAR_BITS(expected, BITMASK_T0_COMPARE_INTERRUPT_0A);
+  CLEAR_BITMASK(expected, BITMASK_T0_COMPARE_INTERRUPT_0A);
 
   ATtinyTimer0_SetTimerCompareInterrupt0A(FALSE);
 

@@ -30,7 +30,7 @@ TEST(WhenSettingAllBits, ItClearsMockRegistersAfterSetup)
 
 TEST(WhenSettingAllBits, ItCanSetAllBitsInWireMode)
 {
-    SET_BITS(expected, BITMASK_SPI_WIRE_MODE);
+    SET_BITMASK(expected, BITMASK_SPI_WIRE_MODE);
 
     ATtinySpi_SetWireMode(USI_TWO_WIRE_2);
     BYTES_EQUAL(expected, USICR);
@@ -38,7 +38,7 @@ TEST(WhenSettingAllBits, ItCanSetAllBitsInWireMode)
 
 TEST(WhenSettingAllBits, ItCanSetAllBitsInClockSource)
 {
-    SET_BITS(expected, BITMASK_SPI_CLOCK_SOURCE);
+    SET_BITMASK(expected, BITMASK_SPI_CLOCK_SOURCE);
 
     ATtinySpi_SetClockSource(USI_EXTERNAL_NEGATIVE_EDGE_SOFTWARE_STROBE);
     BYTES_EQUAL(expected, USICR);
@@ -46,7 +46,7 @@ TEST(WhenSettingAllBits, ItCanSetAllBitsInClockSource)
 
 TEST(WhenSettingAllBits, ItCanSetAllBitsInCounterOverflowInterrupts)
 {
-    SET_BITS(expected, BITMASK_USI_COUNTER_OVERFLOW_INTERRUPTS);
+    SET_BITMASK(expected, BITMASK_USI_COUNTER_OVERFLOW_INTERRUPTS);
 
     ATtinySpi_SetCounterOverflowInterrupts(TRUE);
     BYTES_EQUAL(expected, USICR);
@@ -82,7 +82,7 @@ TEST(WhenClearingAllBits, ItSetsMockRegistersAfterSetup)
 
 TEST(WhenClearingAllBits, ItCanClearAllBitsInWireMode)
 {
-    CLEAR_BITS(expected, BITMASK_SPI_WIRE_MODE);
+    CLEAR_BITMASK(expected, BITMASK_SPI_WIRE_MODE);
 
     ATtinySpi_SetWireMode(USI_PARTIAL_DISABLE);
     BYTES_EQUAL(expected, USICR);
@@ -90,7 +90,7 @@ TEST(WhenClearingAllBits, ItCanClearAllBitsInWireMode)
 
 TEST(WhenClearingAllBits, ItCanClearAllBitsInClockSource)
 {
-    CLEAR_BITS(expected, BITMASK_SPI_CLOCK_SOURCE);
+    CLEAR_BITMASK(expected, BITMASK_SPI_CLOCK_SOURCE);
 
     ATtinySpi_SetClockSource(USI_NONE);
     BYTES_EQUAL(expected, USICR);
@@ -98,7 +98,7 @@ TEST(WhenClearingAllBits, ItCanClearAllBitsInClockSource)
 
 TEST(WhenClearingAllBits, ItCanClearAllBitsInCounterOverflowInterrupts)
 {
-    CLEAR_BITS(expected, BITMASK_USI_COUNTER_OVERFLOW_INTERRUPTS);
+    CLEAR_BITMASK(expected, BITMASK_USI_COUNTER_OVERFLOW_INTERRUPTS);
 
     ATtinySpi_SetCounterOverflowInterrupts(FALSE);
     BYTES_EQUAL(expected, USICR);
