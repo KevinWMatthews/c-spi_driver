@@ -41,6 +41,12 @@ void ATtinySpi_ClearCounterOverflowInterruptFlag(void)
     mock().actualCall("ATtinySpi_ClearCounterOverflowInterruptFlag");
 }
 
+void ATtinySpi_PrepareOutputData(u08 data)
+{
+    mock().actualCall("ATtinySpi_PrepareOutputData")
+        .withParameter("data", data);
+}
+
 void ATtinySpi_SaveInputData(void)
 {
     mock().actualCall("ATtinySpi_SaveInputData");

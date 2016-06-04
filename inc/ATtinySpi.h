@@ -38,6 +38,7 @@ void ATtinySpi_ClearCounterOverflowInterruptFlag(void);
 void ATtinySpi_SetIsTransmittingFlag(BOOL isTransmitting);
 BOOL ATtinySpi_GetIsTransmittingFlag(void);
 
+void ATtinySpi_PrepareOutputData(u08);
 void ATtinySpi_SaveInputData(void);
 
 #endif

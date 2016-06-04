@@ -17,8 +17,14 @@ static void usiOverflowInterrupt(void)
     ATtinySpi_SaveInputData();
 }
 
+static void sendData(u08 data)
+{
+    ATtinySpi_PrepareOutputData(data);
+}
+
 void Spi_CreateSlave(void)
 {
     interface.hardwareSetup = hardwareSetup;
     interface.usiOverflowInterrupt = usiOverflowInterrupt;
+    interface.sendData = sendData;
 }

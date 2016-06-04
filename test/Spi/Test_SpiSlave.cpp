@@ -53,3 +53,13 @@ TEST(SpiSlave, UsiOverflowInterrupt)
 
     Spi_UsiOverflowInterrupt();
 }
+
+//TODO is this correct? Read the docs and check.
+TEST(SpiSlave, SendDataWithDevicePrepared)
+{
+    u08 data = 42;
+    mock().expectOneCall("ATtinySpi_PrepareOutputData")
+        .withParameter("data", data);
+
+    Spi_SendData(data);
+}

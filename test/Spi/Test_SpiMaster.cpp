@@ -65,3 +65,14 @@ TEST(SpiMaster, UsiOverflowInterrupt)
 
     Spi_UsiOverflowInterrupt();
 }
+
+TEST(SpiMaster, SendDataWithDevicePrepared)
+{
+    u08 data = 42;
+    mock().expectOneCall("ATtinySpi_PrepareOutputData")
+        .withParameter("data", data);
+    mock().expectOneCall("ATtinyTimer0_EnableTimerCompareInterrupt0A")
+        .withParameter("enableInterrupt", TRUE);
+
+    Spi_SendData(data);
+}
