@@ -214,3 +214,9 @@ TEST(WhenSettingPinPositions, SetSlavePinPositionToPortB)
     BYTES_EQUAL(expectedDDR, DDRB);
     BYTES_EQUAL(expectedPORT, PORTB);
 }
+
+/*
+ * Test list:
+ *   Save USI data
+ *   Missed packet counter
+ */

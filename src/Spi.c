@@ -17,3 +17,8 @@ void Spi_SendData(u08 data)
 {
     interface.sendData(data);
 }
+
+s08 Spi_GetData(u08 *data)
+{
+    return interface.getData(data);
+}

@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 typedef uint8_t u08;
+typedef int8_t s08;
 
 typedef enum
 {

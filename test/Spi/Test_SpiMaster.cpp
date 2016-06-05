@@ -82,3 +82,34 @@ TEST(SpiMaster, ClockOverflowInterrupt)
     mock().expectOneCall("ATtinySpi_ToggleUsiClock");
     SpiMaster_ClockInterrupt();
 }
+
+TEST(SpiMaster, GetReceivedDataSuccessfully)
+{
+    u08 received = 0, status = 0;
+    mock().expectOneCall("ATtinySpi_GetData")
+          .andReturnValue(42);
+
+    status = Spi_GetData(&received);
+
+    LONGS_EQUAL(SPI_DATA_RECEIVED, status);
+    LONGS_EQUAL(42, received);
+}
+
+TEST(SpiMaster, GetDifferentDataSuccessfully)
+{
+    u08 received = 0, status = 0;
+    mock().expectOneCall("ATtinySpi_GetData")
+          .andReturnValue(43);
+
+    status = Spi_GetData(&received);
+
+    LONGS_EQUAL(SPI_DATA_RECEIVED, status);
+    LONGS_EQUAL(43, received);
+}
+
+/*
+ * Test list:
+ *   GetData must handle NULL pointer.
+ *   GetData must return NO_TRANSMISSION/NO_DATA status.
+ *   GetData must return TRANSMISSION_IN_PROGRESS status.
+ */

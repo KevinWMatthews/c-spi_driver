@@ -56,3 +56,9 @@ void ATtinySpi_ToggleUsiClock(void)
 {
     mock().actualCall("ATtinySpi_ToggleUsiClock");
 }
+
+u08 ATtinySpi_GetData(void)
+{
+    mock().actualCall("ATtinySpi_GetData");
+    return mock().intReturnValue();
+}
