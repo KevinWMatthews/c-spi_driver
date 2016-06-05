@@ -41,4 +41,6 @@ BOOL ATtinySpi_GetIsTransmittingFlag(void);
 void ATtinySpi_PrepareOutputData(u08);
 void ATtinySpi_SaveInputData(void);
 
+void ATtinySpi_ToggleUsiClock(void);
+
 #endif

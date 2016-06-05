@@ -76,3 +76,9 @@ TEST(SpiMaster, SendDataWithDevicePrepared)
 
     Spi_SendData(data);
 }
+
+TEST(SpiMaster, ClockOverflowInterrupt)
+{
+    mock().expectOneCall("ATtinySpi_ToggleUsiClock");
+    SpiMaster_ClockInterrupt();
+}

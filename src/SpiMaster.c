@@ -39,3 +39,8 @@ void Spi_CreateMaster(void)
     interface.usiOverflowInterrupt = usiOverflowInterrupt;
     interface.sendData = sendData;
 }
+
+void SpiMaster_ClockInterrupt(void)
+{
+    ATtinySpi_ToggleUsiClock();
+}
