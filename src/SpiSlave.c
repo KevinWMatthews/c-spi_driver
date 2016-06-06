@@ -1,3 +1,4 @@
+#include "Spi.h"
 #include "SpiPrivate.h"
 #include "ATtinySpi.h"
 
@@ -22,9 +23,20 @@ static void sendData(u08 data)
     ATtinySpi_PrepareOutputData(data);
 }
 
+static s08 getData(u08 *data)
+{
+    if (ATtinySpi_IsTransmitting() == TRUE)
+    {
+        return SPI_TRANSMISSION_IN_PROGRESS;
+    }
+    *data = ATtinySpi_GetData();
+    return SPI_DATA_RECEIVED;
+}
+
 void Spi_CreateSlave(void)
 {
     interface.hardwareSetup = hardwareSetup;
     interface.usiOverflowInterrupt = usiOverflowInterrupt;
     interface.sendData = sendData;
+    interface.getData = getData;
 }

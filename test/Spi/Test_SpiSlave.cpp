@@ -63,3 +63,37 @@ TEST(SpiSlave, SendDataWithDevicePrepared)
 
     Spi_SendData(data);
 }
+
+TEST(SpiSlave, GetReceivedDataSuccessfully)
+{
+    u08 received = 0, status = 0;
+    mock().expectOneCall("ATtinySpi_IsTransmitting")
+          .andReturnValue(FALSE);
+    mock().expectOneCall("ATtinySpi_GetData")
+          .andReturnValue(42);
+
+    status = Spi_GetData(&received);
+
+    LONGS_EQUAL(SPI_DATA_RECEIVED, status);
+    LONGS_EQUAL(42, received);
+}
+
+TEST(SpiSlave, GetDataReturnsIfDataIsNotYetReceived)
+{
+    u08 received = 0, status = 0;
+    mock().expectOneCall("ATtinySpi_IsTransmitting")
+          .andReturnValue(TRUE);
+
+    status = Spi_GetData(&received);
+
+    BYTES_EQUAL(SPI_TRANSMISSION_IN_PROGRESS, status);
+    LONGS_EQUAL(0, received);
+}
+
+/* Test list:
+ *   GetData must handle NULL pointer.
+ *   GetData must return NO_TRANSMISSION/NO_DATA status.
+ *   GetData must return TRANSMISSION_IN_PROGRESS status.
+ *   GetData must catch data from old transmission after it's finished.
+ *   GetData must catch data from old transmission while a new one is in progress.
+ */
