@@ -54,6 +54,13 @@ TEST(SpiSlave, UsiOverflowInterrupt)
     Spi_UsiOverflowInterrupt();
 }
 
+TEST(SpiSlave, StartConditionInterrupt)
+{
+    mock().expectOneCall("ATtinySpi_ClearDataRegister");
+
+    Spi_StartConditionInterrupt();
+}
+
 //TODO is this correct? Read the docs and check.
 TEST(SpiSlave, SendDataWithDevicePrepared)
 {

@@ -73,3 +73,8 @@ void ATtinySpi_SelectSlave(void)
 {
     mock().actualCall("ATtinySpi_SelectSlave");
 }
+
+void ATtinySpi_ClearDataRegister(void)
+{
+    mock().actualCall("ATtinySpi_ClearDataRegister");
+}

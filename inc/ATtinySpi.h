@@ -46,5 +46,6 @@ void ATtinySpi_ToggleUsiClock(void);
 BOOL ATtinySpi_IsTransmitting(void);
 
 void ATtinySpi_SelectSlave(void);
+void ATtinySpi_ClearDataRegister(void);
 
 #endif

@@ -40,3 +40,8 @@ void Spi_CreateSlave(void)
     interface.sendData = sendData;
     interface.getData = getData;
 }
+
+void Spi_StartConditionInterrupt(void)
+{
+    ATtinySpi_ClearDataRegister();
+}
