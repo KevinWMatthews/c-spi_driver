@@ -217,6 +217,8 @@ TEST(WhenSettingPinPositions, SetSlavePinPositionToPortB)
 
 /*
  * Test list:
- *   Save USI data
- *   Missed packet counter
+ *   Save USI data.
+ *   Missed packet counter.
+ *   Clear data register.
+ *   Select Slave (needs quite a bit of work).
  */

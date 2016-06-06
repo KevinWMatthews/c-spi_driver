@@ -98,6 +98,8 @@ TEST(SpiSlave, GetDataReturnsIfDataIsNotYetReceived)
 }
 
 /* Test list:
+ *   Set up an interrupt on a GPIO line to use as a slave select pin.
+ *
  *   GetData must handle NULL pointer.
  *   GetData must return NO_TRANSMISSION/NO_DATA status.
  *   GetData must return TRANSMISSION_IN_PROGRESS status.
