@@ -31,6 +31,7 @@ static void usiOverflowInterrupt(void)
 static void sendData(u08 data)
 {
     ATtinySpi_PrepareOutputData(data);
+    ATtinySpi_SelectSlave();
     ATtinyTimer0_EnableTimerCompareInterrupt0A(TRUE);
 }
 

@@ -71,6 +71,7 @@ TEST(SpiMaster, SendDataWithDevicePrepared)
     u08 data = 42;
     mock().expectOneCall("ATtinySpi_PrepareOutputData")
         .withParameter("data", data);
+    mock().expectOneCall("ATtinySpi_SelectSlave");
     mock().expectOneCall("ATtinyTimer0_EnableTimerCompareInterrupt0A")
         .withParameter("enableInterrupt", TRUE);
 

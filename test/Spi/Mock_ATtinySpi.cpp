@@ -68,3 +68,8 @@ BOOL ATtinySpi_IsTransmitting(void)
     mock().actualCall("ATtinySpi_IsTransmitting");
     return (BOOL)( mock().intReturnValue() );
 }
+
+void ATtinySpi_SelectSlave(void)
+{
+    mock().actualCall("ATtinySpi_SelectSlave");
+}
