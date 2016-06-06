@@ -62,3 +62,9 @@ u08 ATtinySpi_GetData(void)
     mock().actualCall("ATtinySpi_GetData");
     return mock().intReturnValue();
 }
+
+BOOL ATtinySpi_IsTransmitting(void)
+{
+    mock().actualCall("ATtinySpi_IsTransmitting");
+    return (BOOL)( mock().intReturnValue() );
+}

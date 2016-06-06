@@ -43,5 +43,6 @@ void ATtinySpi_SaveInputData(void);
 u08 ATtinySpi_GetData(void);
 
 void ATtinySpi_ToggleUsiClock(void);
+BOOL ATtinySpi_IsTransmitting(void);
 
 #endif

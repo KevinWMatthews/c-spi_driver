@@ -36,6 +36,9 @@ static void sendData(u08 data)
 
 s08 getData(u08 *data)
 {
+    if (ATtinySpi_IsTransmitting() == TRUE)
+        return SPI_TRANSMISSION_IN_PROGRESS;
+
     *data = ATtinySpi_GetData();
     return SPI_DATA_RECEIVED;
 }
