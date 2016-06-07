@@ -1,7 +1,7 @@
 extern "C"
 {
 #include "ATtinySpi.h"
-#include "ATtinySpiPrivate.h"
+#include "ATtinySpiBitmasks.h"
 #include <avr/io.h>
 #include "BitManip.h"
 }

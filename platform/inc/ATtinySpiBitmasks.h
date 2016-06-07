@@ -1,5 +1,5 @@
-#ifndef __ATtinySpiPrivate_H
-#define __ATtinySpiPrivate_H
+#ifndef __ATtinySpiBitmasks_H
+#define __ATtinySpiBitmasks_H
 
 // These bitmasks are exposed to make testing easier.
 #define BITMASK_SPI_WIRE_MODE ((1<<USIWM1) | (1<<USIWM0))
