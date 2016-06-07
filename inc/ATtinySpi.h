@@ -35,15 +35,11 @@ void ATtinySpi_ConfigureUsiPins(Spi_DeviceType masterOrSlave, Spi_PinPosition pi
 void ATtinySpi_EnableCounterOverflowInterrupts(BOOL enableInterrupts);
 void ATtinySpi_ClearCounterOverflowInterruptFlag(void);
 
-void ATtinySpi_SetIsTransmittingFlag(BOOL isTransmitting);
-BOOL ATtinySpi_GetIsTransmittingFlag(void);
-
 void ATtinySpi_PrepareOutputData(u08);
 void ATtinySpi_SaveInputData(void);
 u08 ATtinySpi_GetData(void);
 
 void ATtinySpi_ToggleUsiClock(void);
-BOOL ATtinySpi_IsTransmitting(void);
 
 void ATtinySpi_SelectSlave(void);
 void ATtinySpi_ClearDataRegister(void);

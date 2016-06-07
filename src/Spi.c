@@ -30,7 +30,7 @@ void Spi_SendData(u08 data)
 s08 Spi_GetData(u08 *data)
 {
     if (interface.getData == NULL)
-        return;
+        return SPI_INTERFACE_ERROR;
 
     return interface.getData(data);
 }

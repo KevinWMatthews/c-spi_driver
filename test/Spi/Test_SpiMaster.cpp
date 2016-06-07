@@ -36,8 +36,6 @@ TEST(SpiMaster, HardwareSetup)
           .withParameter("pinPosition", SPI_PORTA_PINS);
     mock().expectOneCall("ATtinySpi_EnableCounterOverflowInterrupts")
           .withParameter("enableInterrupts", TRUE);
-    mock().expectOneCall("ATtinySpi_SetIsTransmittingFlag")
-          .withParameter("isTransmitting", FALSE);
 
     // Set up Timer0 to our current spec
     mock().expectOneCall("ATtinyTimer0_SetTimerBitWidth")
@@ -59,8 +57,6 @@ TEST(SpiMaster, UsiOverflowInterrupt)
     mock().expectOneCall("ATtinyTimer0_EnableTimerCompareInterrupt0A")
         .withParameter("enableInterrupt", FALSE);
     mock().expectOneCall("ATtinySpi_ClearCounterOverflowInterruptFlag");
-    mock().expectOneCall("ATtinySpi_SetIsTransmittingFlag")
-        .withParameter("isTransmitting", FALSE);
     mock().expectOneCall("ATtinySpi_SaveInputData");
 
     Spi_UsiOverflowInterrupt();
@@ -87,8 +83,6 @@ TEST(SpiMaster, ClockOverflowInterrupt)
 TEST(SpiMaster, GetReceivedDataSuccessfully)
 {
     u08 received = 0, status = 0;
-    mock().expectOneCall("ATtinySpi_IsTransmitting")
-          .andReturnValue(FALSE);
     mock().expectOneCall("ATtinySpi_GetData")
           .andReturnValue(42);
 
@@ -96,32 +90,6 @@ TEST(SpiMaster, GetReceivedDataSuccessfully)
 
     LONGS_EQUAL(SPI_DATA_RECEIVED, status);
     LONGS_EQUAL(42, received);
-}
-
-TEST(SpiMaster, GetDifferentDataSuccessfully)
-{
-    u08 received = 0, status = 0;
-    mock().expectOneCall("ATtinySpi_IsTransmitting")
-          .andReturnValue(FALSE);
-    mock().expectOneCall("ATtinySpi_GetData")
-          .andReturnValue(43);
-
-    status = Spi_GetData(&received);
-
-    LONGS_EQUAL(SPI_DATA_RECEIVED, status);
-    LONGS_EQUAL(43, received);
-}
-
-TEST(SpiMaster, GetDataReturnsIfDataIsNotYetReceived)
-{
-    u08 received = 0, status = 0;
-    mock().expectOneCall("ATtinySpi_IsTransmitting")
-          .andReturnValue(TRUE);
-
-    status = Spi_GetData(&received);
-
-    BYTES_EQUAL(SPI_TRANSMISSION_IN_PROGRESS, status);
-    LONGS_EQUAL(0, received);
 }
 
 /*

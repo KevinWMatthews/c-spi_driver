@@ -10,7 +10,6 @@ static void hardwareSetup(void)
     ATtinySpi_SetClockSource(USI_EXTERNAL_POSITIVE_EDGE_SOFTWARE_STROBE);
     ATtinySpi_ConfigureUsiPins(SPI_MASTER, SPI_PORTA_PINS);
     ATtinySpi_EnableCounterOverflowInterrupts(TRUE);
-    ATtinySpi_SetIsTransmittingFlag(FALSE);
 
     // Set up ATtinyTimer0 parameters
     ATtinyTimer0_SetTimerBitWidth(T0_EIGHT_BIT);
@@ -24,7 +23,6 @@ static void usiOverflowInterrupt(void)
 {
     ATtinyTimer0_EnableTimerCompareInterrupt0A(FALSE);
     ATtinySpi_ClearCounterOverflowInterruptFlag();
-    ATtinySpi_SetIsTransmittingFlag(FALSE);
     ATtinySpi_SaveInputData();
 }
 
@@ -37,9 +35,6 @@ static void sendData(u08 data)
 
 s08 getData(u08 *data)
 {
-    if (ATtinySpi_IsTransmitting() == TRUE)
-        return SPI_TRANSMISSION_IN_PROGRESS;
-
     *data = ATtinySpi_GetData();
     return SPI_DATA_RECEIVED;
 }

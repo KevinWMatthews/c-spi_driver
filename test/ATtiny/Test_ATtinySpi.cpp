@@ -53,12 +53,6 @@ TEST(WhenSettingAllBits, ItCanSetAllBitsInCounterOverflowInterrupts)
     BYTES_EQUAL(expected, USICR);
 }
 
-TEST(WhenSettingAllBits, ItCanClearAllBitsInIsTransmittingFlag)
-{
-    ATtinySpi_SetIsTransmittingFlag(TRUE);
-    CHECK( ATtinySpi_GetIsTransmittingFlag() );
-}
-
 
 
 TEST_GROUP(WhenClearingAllBits)
@@ -103,13 +97,6 @@ TEST(WhenClearingAllBits, ItCanClearAllBitsInCounterOverflowInterrupts)
 
     ATtinySpi_EnableCounterOverflowInterrupts(FALSE);
     BYTES_EQUAL(expected, USICR);
-}
-
-TEST(WhenClearingAllBits, ItCanClearAllBitsInIsTransmittingFlag)
-{
-    ATtinySpi_SetIsTransmittingFlag(TRUE);
-    ATtinySpi_SetIsTransmittingFlag(FALSE);
-    CHECK( !ATtinySpi_GetIsTransmittingFlag() );
 }
 
 

@@ -30,12 +30,6 @@ void ATtinySpi_EnableCounterOverflowInterrupts(BOOL enableInterrupts)
           .withParameter("enableInterrupts", enableInterrupts);
 }
 
-void ATtinySpi_SetIsTransmittingFlag(BOOL isTransmitting)
-{
-    mock().actualCall("ATtinySpi_SetIsTransmittingFlag")
-          .withParameter("isTransmitting", isTransmitting);
-}
-
 void ATtinySpi_ClearCounterOverflowInterruptFlag(void)
 {
     mock().actualCall("ATtinySpi_ClearCounterOverflowInterruptFlag");
@@ -61,12 +55,6 @@ u08 ATtinySpi_GetData(void)
 {
     mock().actualCall("ATtinySpi_GetData");
     return mock().intReturnValue();
-}
-
-BOOL ATtinySpi_IsTransmitting(void)
-{
-    mock().actualCall("ATtinySpi_IsTransmitting");
-    return (BOOL)( mock().intReturnValue() );
 }
 
 void ATtinySpi_SelectSlave(void)

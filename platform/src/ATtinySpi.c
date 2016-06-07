@@ -4,8 +4,6 @@
 #include "BitManip.h"
 #include "ChipFunctions.h"
 
-static BOOL isTransmittingFlag = FALSE;
-
 void ATtinySpi_SetWireMode(Usi_WireMode wireMode)
 {
     SHIFT_AND_SET_BITMASK_TO(USICR, wireMode, BITMASK_SPI_WIRE_MODE);
@@ -82,14 +80,4 @@ void ATtinySpi_ConfigureUsiPins(Spi_DeviceType masterOrSlave, Spi_PinPosition pi
             setPinPositionForSlavePortB();
         }
     }
-}
-
-void ATtinySpi_SetIsTransmittingFlag(BOOL isTransmitting)
-{
-    isTransmittingFlag = isTransmitting;
-}
-
-BOOL ATtinySpi_GetIsTransmittingFlag(void)
-{
-    return isTransmittingFlag;
 }

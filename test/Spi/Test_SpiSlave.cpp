@@ -36,8 +36,6 @@ TEST(SpiSlave, HardwareSetup)
           .withParameter("pinPosition", SPI_PORTA_PINS);
     mock().expectOneCall("ATtinySpi_EnableCounterOverflowInterrupts")
           .withParameter("enableInterrupts", TRUE);
-    mock().expectOneCall("ATtinySpi_SetIsTransmittingFlag")
-          .withParameter("isTransmitting", FALSE);
 
     // Timer0 is not needed
 
@@ -47,8 +45,6 @@ TEST(SpiSlave, HardwareSetup)
 TEST(SpiSlave, UsiOverflowInterrupt)
 {
     mock().expectOneCall("ATtinySpi_ClearCounterOverflowInterruptFlag");
-    mock().expectOneCall("ATtinySpi_SetIsTransmittingFlag")
-        .withParameter("isTransmitting", FALSE);
     mock().expectOneCall("ATtinySpi_SaveInputData");
 
     Spi_UsiOverflowInterrupt();
@@ -61,7 +57,7 @@ TEST(SpiSlave, StartConditionInterrupt)
     Spi_StartConditionInterrupt();
 }
 
-//TODO is this correct? Read the docs and check.
+//TODO is this correct? Read the docs and check if slave behavior differs from master behavior.
 TEST(SpiSlave, SendDataWithDevicePrepared)
 {
     u08 data = 42;
@@ -74,8 +70,6 @@ TEST(SpiSlave, SendDataWithDevicePrepared)
 TEST(SpiSlave, GetReceivedDataSuccessfully)
 {
     u08 received = 0, status = 0;
-    mock().expectOneCall("ATtinySpi_IsTransmitting")
-          .andReturnValue(FALSE);
     mock().expectOneCall("ATtinySpi_GetData")
           .andReturnValue(42);
 
@@ -83,18 +77,6 @@ TEST(SpiSlave, GetReceivedDataSuccessfully)
 
     LONGS_EQUAL(SPI_DATA_RECEIVED, status);
     LONGS_EQUAL(42, received);
-}
-
-TEST(SpiSlave, GetDataReturnsIfDataIsNotYetReceived)
-{
-    u08 received = 0, status = 0;
-    mock().expectOneCall("ATtinySpi_IsTransmitting")
-          .andReturnValue(TRUE);
-
-    status = Spi_GetData(&received);
-
-    BYTES_EQUAL(SPI_TRANSMISSION_IN_PROGRESS, status);
-    LONGS_EQUAL(0, received);
 }
 
 /* Test list:
